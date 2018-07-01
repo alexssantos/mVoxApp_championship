@@ -27,55 +27,24 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.Criar_Conexao();
         }
 
-
-        public List<Team> GetTeams()
-        {
-            //CONECTA, QUERY, COMANDO
-            Conectar();
-            string query = "SELECT * FROM team";
-            conexao.ExecutarComando(query, true);
-            
-            //MAPEAMENTO
-            List<Team> ListaRetorno = new List<Team>();
-            Team aux = null;
-            if (conexao.obj_DataReader.HasRows)
-            {
-                while (conexao.obj_DataReader.Read())
-                {
-                    aux = new Team();
-                    aux.id = (int)conexao.obj_DataReader["id"];
-                    aux.name = conexao.obj_DataReader["name"].ToString();
-                    aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
-                    aux.flag = conexao.obj_DataReader["flag"].ToString();
-
-                    ListaRetorno.Add(aux);
-                }
-
-            }
-
-            return ListaRetorno;
-        }
+       
 
         #region CRUD
-        public bool AdicionarUsuario(Team _user)
+        //CREATE
+        public bool Create_DB(Team _user)
         {
             bool retorno = false;
-
             try
             {
                 Conectar();
-
-                string query = "insert into amigos " +
-                       " (nome,sobrenome,dataniver) " +
+                string query = "INSERT into Team " +
+                       " (name , flag, keygroup) " +
                        " values " +
                        " ('{0}','{1}','{2}')";
-
                 query = string.Format(query, _user.name,
-                                             _user.keyGroup,
-                                             _user.points);
-
+                                             _user.flag,
+                                             _user.keyGroup);
                 retorno = conexao.ExecutarComando(query, false);
-
             }
             catch (Exception ex)
             {
@@ -142,9 +111,34 @@ namespace mVoxApp.Web.App_Data.Repository
 
 
         }
-        #endregion
 
-        //Details BY ID
+        //READ
+        public List<Team> GetTeams()
+        {
+            //CONECTA, QUERY, COMANDO
+            Conectar();
+            string query = "SELECT * FROM team";
+            conexao.ExecutarComando(query, true);
+
+            //MAPEAMENTO
+            List<Team> ListaRetorno = new List<Team>();
+            Team aux = null;
+            if (conexao.obj_DataReader.HasRows)
+            {
+                while (conexao.obj_DataReader.Read())
+                {
+                    aux = new Team();
+                    aux.id = (int)conexao.obj_DataReader["id"];
+                    aux.name = conexao.obj_DataReader["name"].ToString();
+                    aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
+                    aux.flag = conexao.obj_DataReader["flag"].ToString();
+
+                    ListaRetorno.Add(aux);
+                }
+            }
+            return ListaRetorno;
+        }
+        //---- BY ID
         public Team BuscarUsuario(int id)
         {
             //CONECTA, QUERY, COMANDO
@@ -176,8 +170,7 @@ namespace mVoxApp.Web.App_Data.Repository
             return ListaRetorno.First();
 
         }
-
-        //DETAILS BY NAME
+        //---- BY NAME
         public List<Team> BuscaParteNome(string busca)
         {
             //
@@ -208,8 +201,7 @@ namespace mVoxApp.Web.App_Data.Repository
 
             return ListaRetorno;
         }
-
-        //DETAILS BY ANIVER
+        //---- BY ANIVER
         public List<Team> BuscaAniversariante(DateTime niver)
         {
             //
@@ -239,5 +231,6 @@ namespace mVoxApp.Web.App_Data.Repository
             return ListaRetorno;
         }
 
+        #endregion
     }
 }

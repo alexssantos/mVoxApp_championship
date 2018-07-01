@@ -11,6 +11,8 @@ namespace mVoxApp.Web.Models
         public string name { get; set; }
         public int points { get; set; }
         public int keyGroup { get; set; }
+        public string flag { get; set; }
+
 
     }
 }

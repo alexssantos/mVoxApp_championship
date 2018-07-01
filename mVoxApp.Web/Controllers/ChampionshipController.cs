@@ -1,4 +1,5 @@
 ﻿using mVoxApp.Web.App_Data.Repository;
+using mVoxApp.Web.Controllers.BLL;
 using mVoxApp.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,19 @@ namespace mVoxApp.Web.Controllers
 {
     public class ChampionshipController : Controller
     {
+        Manager _mnger;
+
         // GET: Championship
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Registreds()
+        public ActionResult Register()
         {
-            Repository teamRepository = new Repository();
-            List<Team> ListaTodos = teamRepository.GetTeams();
-            var a = ListaTodos.OrderBy(x => x.name);
-            return View(a);
+            
+
+            return View();
         }
 
         // GET: Championship/Details/5
@@ -33,22 +35,30 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Create
         public ActionResult Create()
         {
+            _mnger = new Manager();
+            List<Team> listReturn = _mnger.GetAll();
+            ViewData["TeamList"] = listReturn;
+
             return View();
         }
 
         // POST: Championship/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Team _team)
         {
             try
             {
-                // TODO: Add insert logic here
+                _mnger = new Manager();
+                _mnger.Create(_team);
+                
+                //ViewBag.Msg = "Criado Com Sucesso";
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                //ViewBag.Msg = "Erro ao Tentar Criar";
+                return View("Error");
             }
         }
 
