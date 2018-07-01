@@ -207,6 +207,7 @@
     <Content Include="Views\Championship\Create.cshtml" />
     <Content Include="Views\Championship\Index.cshtml" />
     <Content Include="Views\Championship\Edit.cshtml" />
+    <Content Include="Views\Championship\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

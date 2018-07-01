@@ -82,18 +82,20 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            _mnger = new Manager();
+            Team retorno = _mnger.GetByID(id);
+            return View("Delete", retorno);            
         }
 
         // POST: Championship/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Team _team)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                _mnger = new Manager();
+                _mnger.Delete(id);
+                return RedirectToAction("Create");
             }
             catch
             {

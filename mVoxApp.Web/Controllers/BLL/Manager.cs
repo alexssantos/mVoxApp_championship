@@ -61,8 +61,9 @@ namespace mVoxApp.Web.Controllers.BLL
             }
         }
 
-        public bool Deletar_Usuario(int id)
+        public bool Delete(int id)
         {
+            _rep = new Repository();
             bool retorno = _rep.Delete_DB(id);
             return retorno;
         }
