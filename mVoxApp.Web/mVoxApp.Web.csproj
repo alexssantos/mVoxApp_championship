@@ -206,6 +206,7 @@
     <Content Include="Views\Championship\_TeamList.cshtml" />
     <Content Include="Views\Championship\Create.cshtml" />
     <Content Include="Views\Championship\Index.cshtml" />
+    <Content Include="Views\Championship\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -59,8 +59,8 @@ namespace mVoxApp.Web.Controllers
         public ActionResult Edit(int id)
         {
             _mnger = new Manager();
-            bool retorno = _mnger.GetByID(id);
-            return View();
+            Team retorno = _mnger.GetByID(id);
+            return View("Edit", retorno);
         }
 
         // POST: Championship/Edit/5
@@ -71,12 +71,11 @@ namespace mVoxApp.Web.Controllers
             {
                 _mnger = new Manager();
                 _mnger.Update(_team);
-
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("Error");
             }
         }
 

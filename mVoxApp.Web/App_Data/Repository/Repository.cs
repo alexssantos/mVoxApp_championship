@@ -147,7 +147,7 @@ namespace mVoxApp.Web.App_Data.Repository
             //MAPEAMENTO
             List<Team> ListaRetorno = Mapping(conexao);
                         
-            //ID repetido
+            //Busca repetida
             Team _teamRetorno;
             if (ListaRetorno.Count > 1)
             {

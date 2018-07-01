@@ -19,6 +19,22 @@ namespace mVoxApp.Web.Controllers.BLL
 
             return _returo;
         }
+
+        public Team GetByID(int id)
+        {
+            _rep = new Repository();
+            Team _retorno = _rep.GetByID(id);
+
+            return _retorno;
+        }
+
+        public List<Team> GetByName(string teamName)
+        {
+            _rep = new Repository();
+            List<Team> _retorno = _rep.GetBySTRING(teamName);
+
+            return _retorno;
+        }
                 
 
         public bool Create(Team team)
