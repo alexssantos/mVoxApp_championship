@@ -199,7 +199,7 @@ namespace mVoxApp.Web.App_Data.Repository
 
         //-----------------------KeyGorup ---------------------------
 
-        public List<Team> GetKeyGroups()
+        public List<KeyGroup> GetKeyGroups()
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
@@ -207,27 +207,26 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<Team> ListaRetorno = MappingTeams(conexao);
-                        
+            List<KeyGroup> ListaRetorno = MappingKeygroup(conexao);                        
 
             return ListaRetorno;
         }
 
         //Mapping TEAM
-        private List<Team> MappingKeygroup(ConnectionDB conexao)
+        private List<KeyGroup> MappingKeygroup(ConnectionDB conexao)
         {
-            List<Team> ListaRetorno = new List<Team>();
-            Team aux = null;
+            List<KeyGroup> ListaRetorno = new List<KeyGroup>();
+            KeyGroup aux = null;
 
             if (conexao.obj_DataReader.HasRows)
             {
                 while (conexao.obj_DataReader.Read())
                 {
-                    aux = new Team();
+                    aux = new KeyGroup();
                     aux.id = (int)conexao.obj_DataReader["id"];
                     aux.name = conexao.obj_DataReader["name"].ToString();
-                    aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
-                    aux.flag = conexao.obj_DataReader["flag"].ToString();
+                    aux.maxTeams = (int)conexao.obj_DataReader["maxteams"];
+                    aux.totalTeams = (int)conexao.obj_DataReader["totalteams"];                    
 
                     ListaRetorno.Add(aux);
                 }

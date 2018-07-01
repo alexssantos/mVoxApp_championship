@@ -1,6 +1,11 @@
-﻿@model IEnumerable<mVoxApp.Web.Models.Team>
-<hr />
-<br /><br />
+﻿@model IEnumerable<mVoxApp.Web.Models.KeyGroup>
+<hr /><br /><br /><br />
+
+<hw>
+    <h2 class="text-center">Table:@ViewData["keygroupname1"] </h2>
+</hw>
+
+<h3 class="text-center">Model First_Obj Name: @Model.First().name</h3>
 
 <table class="table">
     <tr>
@@ -8,13 +13,10 @@
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.points)
+            @Html.DisplayNameFor(model => model.maxTeams)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.keyGroup)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.flag)
+            @Html.DisplayNameFor(model => model.totalTeams)
         </th>
         <th></th>
     </tr>
@@ -26,13 +28,10 @@
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.points)
+                @Html.DisplayFor(modelItem => item.maxTeams)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.keyGroup)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.flag)
+                @Html.DisplayFor(modelItem => item.totalTeams)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.id }) |

@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BLL\ConverterTeam .cs" />
     <Compile Include="Controllers\BLL\ConverterKeygroup.cs" />
     <Compile Include="Controllers\BLL\Manager.cs" />
     <Compile Include="Controllers\ChampionshipController.cs" />
@@ -209,6 +210,7 @@
     <Content Include="Views\Championship\Delete.cshtml" />
     <Content Include="Views\Championship\_TablePView.cshtml" />
     <Content Include="Views\Championship\Tables.cshtml" />
+    <Content Include="Views\Championship\_TablePView_keygroup.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

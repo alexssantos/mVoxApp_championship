@@ -12,6 +12,7 @@ namespace mVoxApp.Web.Controllers
     public class ChampionshipController : Controller
     {
         Manager _mnger;
+        ManagerKeygroup _mngerKey;
 
         // GET: Championship
         public ActionResult Index()
@@ -22,19 +23,31 @@ namespace mVoxApp.Web.Controllers
         public ActionResult Tables()
         {
             _mnger = new Manager();
-            List<string> _tablesChamp = new List<string>();
-               
-
-            foreach (var iTableChamp in _tablesChamp)
-            {
-                int numb = iTableChamp.IndexOf(iTableChamp) +1;
-                ViewData[$"iTable{numb}"] = _mnger.GetAll();
-            };
-
             ViewData["table1"] = _mnger.GetAll();
             ViewData["table2"] = _mnger.GetAll();
-            ViewData["table3"] = _mnger.GetAll();
-            ViewData["table4"] = _mnger.GetAll();
+
+            //Keygroup
+            _mngerKey = new ManagerKeygroup();
+            List<KeyGroup> _listKeygroups = new List<KeyGroup>();
+            _listKeygroups = _mngerKey.GetAll();
+
+            //pegar cada OBJETO da lista
+            for (int i = 0; i < _listKeygroups.Count; i++)
+            {
+                ViewData[$"keygroup{i+1}"] = _mngerKey.GetAll();
+            }
+
+            //pegar parametro NAME de cada OBJETO dentro da lista
+            int count = 1;
+            foreach (var item in _listKeygroups)
+            {                
+                ViewData[$"keygroupname{count}"] = item.name;
+                count++;
+            }
+
+            ViewData["keygroupAll"] = _listKeygroups;          
+
+            //Text test
             ViewBag.TableTitle = "ViewBab-Title";
 
             return View("Tables", _mnger.GetAll());

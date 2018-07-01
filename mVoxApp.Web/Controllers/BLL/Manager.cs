@@ -67,6 +67,19 @@ namespace mVoxApp.Web.Controllers.BLL
             bool retorno = _rep.Delete_DB(id);
             return retorno;
         }
+    }
 
+    public class ManagerKeygroup
+    {
+        Repository _rep;
+
+        public List<KeyGroup> GetAll()
+        {
+            _rep = new Repository();
+            List<KeyGroup> ListaTodos = _rep.GetKeyGroups();
+            List<KeyGroup> _returo = ListaTodos.OrderBy(x => x.name).ToList();
+
+            return _returo;
+        }
     }
 }

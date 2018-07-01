@@ -55,26 +55,37 @@
 </div>
 
 <hr /><br /><br /><br />
-<div>
-    <h2>Test passando varias Partial de uma vez</h2>
+                  <div>
+                      <h2 class="text-center">Test passando varias Partial de uma vez</h2>
+                      @{
+                          int count = 0;
+                          foreach (var item in ViewData["keygroupAll"] as IEnumerable<mVoxApp.Web.Models.KeyGroup>) { count++; }
+                      }
+                      <h3>Quantidade de KeyGroups no Banco: @count</h3>
 
-    @{
-        if (ViewData["table1"] != null)
-        {
-            if (ViewData.Values != null && ViewData.Values.Count() > 0)
-            {
-                for (int i = 0; i < ViewData.Count(); i++)
-                {
-                    @Html.Partial("_TablePView", ViewData["table1"])
+                      @{
+                          if (ViewData["table1"] != null)
+                          {
+                              if (ViewData.Values != null && ViewData.Values.Count() > 0)
+                              {
+                                  for (int i = 0; i < count; i++)
+                                  {
+                                      <hr /><br/><br /><br />
+                                      <hw>
+                                          <h2 class="text-center">Group: @ViewData[$"keygroupname{i+1}"] </h2>
+                                      </hw>
+                                      @Html.Partial("_TablePView", ViewData["table1"])
 
-                }
-            }
-        }
-    }
+                                  }
+                              }
+                          }
+                      }
 
-</div>
-<div>
-    <h2>Test Passando Partial por vez</h2>
-    @Html.Partial("_TablePView", ViewData["table2"])
+                  </div>
+
+<hr /><br /><br /><br />
+<div >
+    <h2 class="text-center">Test Passando Partial por vez</h2>
+    @Html.Partial("_TablePView_keygroup", ViewData["keygroup1"])
 </div>
 
