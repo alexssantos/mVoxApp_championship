@@ -35,6 +35,7 @@ namespace mVoxApp.Web.Controllers
             ViewData["table2"] = _mnger.GetAll();
             ViewData["table3"] = _mnger.GetAll();
             ViewData["table4"] = _mnger.GetAll();
+            ViewBag.TableTitle = "ViewBab-Title";
 
             return View("Tables", _mnger.GetAll());
         }
