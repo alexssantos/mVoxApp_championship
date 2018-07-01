@@ -26,12 +26,12 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.string_Conexao = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\mVoxApp_Data.mdf;Integrated Security=True;Connect Timeout=30";            
             conexao.Criar_Conexao();
         }
-
        
 
         #region CRUD
+
         //CREATE
-        public bool Create_DB(Team _user)
+        public bool Create_DB(Team _team)
         {
             bool retorno = false;
             try
@@ -41,35 +41,10 @@ namespace mVoxApp.Web.App_Data.Repository
                        " (name , flag, keygroup) " +
                        " values " +
                        " ('{0}','{1}','{2}')";
-                query = string.Format(query, _user.name,
-                                             _user.flag,
-                                             _user.keyGroup);
+                query = string.Format(query, _team.name,
+                                             _team.flag,
+                                             _team.keyGroup);
                 retorno = conexao.ExecutarComando(query, false);
-            }
-            catch (Exception ex)
-            {
-                conexao.Error = ex.Message;
-            }
-
-            return retorno;
-        }
-
-        //DELETE
-        public bool Delete_Usuario(int id)
-        {
-            bool retorno = false;
-
-            try
-            {
-                Conectar();
-
-                string query = "delete amigos where id = '{0}'";
-
-                query = string.Format(query, id);
-
-                //paramentro FALSE pq não é um SELECT para retornar obj.
-                retorno = conexao.ExecutarComando(query, false);
-
             }
             catch (Exception ex)
             {
@@ -80,24 +55,22 @@ namespace mVoxApp.Web.App_Data.Repository
         }
 
         //UPDATE
-        public bool update_usuario(Team _user)
+        public bool Update_DB(Team _team)
         {
             bool retorno = false;
-
             try
             {
                 Conectar();
 
-                string query = @"update amigos set
-                                     nome = '{1}'
-                                     sobrenome = '{2}',
-                                     dataniver = '{3}',                                      
+                string query = @"update team set name = '{1}'
+                                                 flag = '{2}',
+                                                 keygroup = '{3}',                                      
                                where id = '{0}'";
 
-                query = string.Format(query, _user.id,
-                                                 _user.name,
-                                                 _user.flag,
-                                                 _user.keyGroup.ToString("yyyy-MM-dd"));
+                query = string.Format(query, _team.id,
+                                                 _team.name,
+                                                 _team.flag,
+                                                 _team.keyGroup);
 
                 retorno = conexao.ExecutarComando(query, false);
             }
@@ -106,13 +79,34 @@ namespace mVoxApp.Web.App_Data.Repository
 
                 conexao.Error = ex.Message;
             }
-
             return retorno;
-
-
         }
 
-        //READ
+        //DELETE
+        public bool Delete_DB(int id)
+        {
+            bool retorno = false;
+
+            try
+            {
+                Conectar();
+
+                string query = "delete team where id = '{0}'";
+
+                query = string.Format(query, id);
+
+                //paramentro FALSE - pq não é um SELECT para retornar obj.
+                retorno = conexao.ExecutarComando(query, false);
+            }
+            catch (Exception ex)
+            {
+                conexao.Error = ex.Message;
+            }
+
+            return retorno;
+        }
+        
+        //READ ------------------------------
         public List<Team> GetTeams()
         {
             //CONECTA, QUERY, COMANDO
@@ -121,116 +115,101 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<Team> ListaRetorno = new List<Team>();
-            Team aux = null;
-            if (conexao.obj_DataReader.HasRows)
-            {
-                while (conexao.obj_DataReader.Read())
-                {
-                    aux = new Team();
-                    aux.id = (int)conexao.obj_DataReader["id"];
-                    aux.name = conexao.obj_DataReader["name"].ToString();
-                    aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
-                    aux.flag = conexao.obj_DataReader["flag"].ToString();
+            List<Team> ListaRetorno = Mapping(conexao);
 
-                    ListaRetorno.Add(aux);
-                }
-            }
+            //List<Team> ListaRetorno = new List<Team>();
+            //Team aux = null;
+            //if (conexao.obj_DataReader.HasRows)
+            //{
+            //    while (conexao.obj_DataReader.Read())
+            //    {
+            //        aux = new Team();
+            //        aux.id = (int)conexao.obj_DataReader["id"];
+            //        aux.name = conexao.obj_DataReader["name"].ToString();
+            //        aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
+            //        aux.flag = conexao.obj_DataReader["flag"].ToString();
+
+            //        ListaRetorno.Add(aux);
+            //    }
+            //}
+
             return ListaRetorno;
         }
         //---- BY ID
-        public Team BuscarUsuario(int id)
+        public Team GetByID(int id)
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
-            string query = "select * from amigos where id = '{0}'";
+            string query = "select * from team where id = '{0}'";
             query = string.Format(query, id);
             conexao.ExecutarComando(query, true);
-
-
+            
             //MAPEAMENTO
-            List<Team> ListaRetorno = new List<Team>();
-            Team aux = null;
-
-            if (conexao.obj_DataReader.HasRows)
+            List<Team> ListaRetorno = Mapping(conexao);
+                        
+            //ID repetido
+            Team _teamRetorno;
+            if (ListaRetorno.Count > 1)
             {
-                while (conexao.obj_DataReader.Read())
-                {
-                    aux = new Team();
-                    aux.id = (int)conexao.obj_DataReader["id"];
-                    aux.name = conexao.obj_DataReader["name"].ToString();
-                    aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
-                    aux.flag = conexao.obj_DataReader["flag"].ToString();
-
-                    ListaRetorno.Add(aux);
-                }
-
+               _teamRetorno = ListaRetorno.Find(x => x.id == id);
+            }
+            else
+            {
+               _teamRetorno = ListaRetorno.First();
             }
 
-            return ListaRetorno.First();
-
-        }
+            return _teamRetorno;
+        } 
         //---- BY NAME
-        public List<Team> BuscaParteNome(string busca)
+        public List<Team> GetBySTRING(string busca)
         {
-            //
+            //CONECTA, QUERY, COMANDO
             Conectar();
-            string query = "select * from amigos where nome like '%{0}%' ";
+            string query = "select * from team where name like '%{0}%' ";
             query = string.Format(query, busca);
             conexao.ExecutarComando(query, true);
 
-
             //MAPEAMENTO
-            List<Team> ListaRetorno = new List<Team>();
-            Team aux = null;
-
-            if (conexao.obj_DataReader.HasRows)
-            {
-                while (conexao.obj_DataReader.Read())
-                {
-                    aux = new Team();
-                    aux.id = (int)conexao.obj_DataReader["id"];
-                    aux.name = conexao.obj_DataReader["name"].ToString();
-                    aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
-                    aux.flag = conexao.obj_DataReader["flag"].ToString();
-
-                    ListaRetorno.Add(aux);
-                }
-
-            }
+            List<Team> ListaRetorno = Mapping(conexao);
 
             return ListaRetorno;
-        }
-        //---- BY ANIVER
-        public List<Team> BuscaAniversariante(DateTime niver)
+        } 
+        //---- BY DATE
+        public List<Team> DetByDATE(DateTime createdIn_Date)
         {
-            //
+            //CONECTA, QUERY, COMANDO
             Conectar();
-            string query = $"select * from amigos where dataniver = {niver.DayOfYear}";
-            query = string.Format(query, niver);
+            string query = $"SELECT * FROM team WHERE created = {createdIn_Date.DayOfYear}";
+            query = string.Format(query, createdIn_Date);
             conexao.ExecutarComando(query, true);
 
-
             //MAPEAMENTO
-            List<Team> ListaRetorno = new List<Team>();
-            Team aux = null;
-
-            if (conexao.obj_DataReader.HasRows)
-            {
-                while (conexao.obj_DataReader.Read())
-                {
-                    aux = new Team();
-                    aux.id = (int)conexao.obj_DataReader["id"];
-                    aux.name = conexao.obj_DataReader["name"].ToString();
-                    aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
-                    aux.flag = conexao.obj_DataReader["flag"].ToString();
-
-                    ListaRetorno.Add(aux);
-                }
-            }
+            List<Team> ListaRetorno = Mapping(conexao);
+            
             return ListaRetorno;
         }
 
         #endregion
+
+        private List<Team> Mapping(ConnectionDB conexao)
+        {
+            List<Team> ListaRetorno = new List<Team>();
+            Team aux = null;
+
+            if (conexao.obj_DataReader.HasRows)
+            {
+                while (conexao.obj_DataReader.Read())
+                {
+                    aux = new Team();
+                    aux.id = (int)conexao.obj_DataReader["id"];
+                    aux.name = conexao.obj_DataReader["name"].ToString();
+                    aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
+                    aux.flag = conexao.obj_DataReader["flag"].ToString();
+
+                    ListaRetorno.Add(aux);
+                }
+            }
+            return ListaRetorno;
+        }
     }
 }

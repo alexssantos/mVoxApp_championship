@@ -19,13 +19,6 @@ namespace mVoxApp.Web.Controllers
             return View();
         }
 
-        public ActionResult Register()
-        {
-            
-
-            return View();
-        }
-
         // GET: Championship/Details/5
         public ActionResult Details(int id)
         {
@@ -65,16 +58,19 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Edit/5
         public ActionResult Edit(int id)
         {
+            _mnger = new Manager();
+            bool retorno = _mnger.GetByID(id);
             return View();
         }
 
         // POST: Championship/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Team _team)
         {
             try
             {
-                // TODO: Add update logic here
+                _mnger = new Manager();
+                _mnger.Update(_team);
 
                 return RedirectToAction("Index");
             }

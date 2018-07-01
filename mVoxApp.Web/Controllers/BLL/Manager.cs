@@ -19,13 +19,37 @@ namespace mVoxApp.Web.Controllers.BLL
 
             return _returo;
         }
+                
 
-        public void Create(Team team)
+        public bool Create(Team team)
         {
             _rep = new Repository();
-            _rep.Create_DB(team);            
+            bool retornoCreate = _rep.Create_DB(team);
+
+            return retornoCreate;
         }
 
+        public bool Update(Team _team)
+        {
+            _rep = new Repository();
+            bool retornoDel = _rep.Delete_DB(_team.id);
+            bool retornoAdd = _rep.Create_DB(_team);
+
+            if (retornoAdd == retornoDel == true)
+            {
+                return retornoAdd;
+            }
+            else
+            {                
+                return false;
+            }
+        }
+
+        public bool Deletar_Usuario(int id)
+        {
+            bool retorno = _rep.Delete_DB(id);
+            return retorno;
+        }
 
     }
 }
