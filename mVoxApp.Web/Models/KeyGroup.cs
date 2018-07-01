@@ -10,6 +10,19 @@ namespace mVoxApp.Web.Models
         public int id { get; set; }
         public string name { get; set; }
         public int maxTeams { get; set; }
-        List<Team> TeamFrom { get; set; }
+        public int totalTeams { get; set; }
+        List<Team> ListTeam { get; set; }
     }
+
+    public class KeyGroupViewModel
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public int maxTeams { get; set; }
+        public int totalTeams { get; set; }
+
+    }
+
+
+
 }

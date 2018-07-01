@@ -28,7 +28,7 @@ namespace mVoxApp.Web.App_Data.Repository
         }
        
 
-        #region CRUD
+        #region CRUD TEAM
 
         //CREATE
         public bool Create_DB(Team _team)
@@ -115,24 +115,8 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<Team> ListaRetorno = Mapping(conexao);
-
-            //List<Team> ListaRetorno = new List<Team>();
-            //Team aux = null;
-            //if (conexao.obj_DataReader.HasRows)
-            //{
-            //    while (conexao.obj_DataReader.Read())
-            //    {
-            //        aux = new Team();
-            //        aux.id = (int)conexao.obj_DataReader["id"];
-            //        aux.name = conexao.obj_DataReader["name"].ToString();
-            //        aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
-            //        aux.flag = conexao.obj_DataReader["flag"].ToString();
-
-            //        ListaRetorno.Add(aux);
-            //    }
-            //}
-
+            List<Team> ListaRetorno = MappingTeams(conexao);
+                  
             return ListaRetorno;
         }
         //---- BY ID
@@ -145,7 +129,7 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
             
             //MAPEAMENTO
-            List<Team> ListaRetorno = Mapping(conexao);
+            List<Team> ListaRetorno = MappingTeams(conexao);
                         
             //Busca repetida
             Team _teamRetorno;
@@ -170,7 +154,7 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<Team> ListaRetorno = Mapping(conexao);
+            List<Team> ListaRetorno = MappingTeams(conexao);
 
             return ListaRetorno;
         } 
@@ -184,14 +168,53 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<Team> ListaRetorno = Mapping(conexao);
+            List<Team> ListaRetorno = MappingTeams(conexao);
             
             return ListaRetorno;
         }
 
         #endregion
 
-        private List<Team> Mapping(ConnectionDB conexao)
+        //Mapping TEAM
+        private List<Team> MappingTeams(ConnectionDB conexao)
+        {
+            List<Team> ListaRetorno = new List<Team>();
+            Team aux = null;
+
+            if (conexao.obj_DataReader.HasRows)
+            {
+                while (conexao.obj_DataReader.Read())
+                {
+                    aux = new Team();
+                    aux.id = (int)conexao.obj_DataReader["id"];
+                    aux.name = conexao.obj_DataReader["name"].ToString();
+                    aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
+                    aux.flag = conexao.obj_DataReader["flag"].ToString();
+
+                    ListaRetorno.Add(aux);
+                }
+            }
+            return ListaRetorno;
+        }
+
+        //-----------------------KeyGorup ---------------------------
+
+        public List<Team> GetKeyGroups()
+        {
+            //CONECTA, QUERY, COMANDO
+            Conectar();
+            string query = "SELECT * FROM keygroup";
+            conexao.ExecutarComando(query, true);
+
+            //MAPEAMENTO
+            List<Team> ListaRetorno = MappingTeams(conexao);
+                        
+
+            return ListaRetorno;
+        }
+
+        //Mapping TEAM
+        private List<Team> MappingKeygroup(ConnectionDB conexao)
         {
             List<Team> ListaRetorno = new List<Team>();
             Team aux = null;
