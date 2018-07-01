@@ -29,7 +29,7 @@ namespace mVoxApp.Web.Controllers
             //Keygroup
             _mngerKey = new ManagerKeygroup();
             List<KeyGroup> _listKeygroups = new List<KeyGroup>();
-            _listKeygroups = _mngerKey.GetAll();
+            _listKeygroups = _mngerKey.GetAll().OrderBy(x=>x.id).ToList();
 
             //pegar cada OBJETO da lista
             for (int i = 0; i < _listKeygroups.Count; i++)
