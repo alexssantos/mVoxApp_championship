@@ -156,6 +156,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\KeyGroup.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -204,10 +205,12 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Championship\_TeamList.cshtml" />
-    <Content Include="Views\Championship\Create.cshtml" />
+    <Content Include="Views\Championship\Register.cshtml" />
     <Content Include="Views\Championship\Index.cshtml" />
     <Content Include="Views\Championship\Edit.cshtml" />
     <Content Include="Views\Championship\Delete.cshtml" />
+    <Content Include="Views\Championship\_TablePView.cshtml" />
+    <Content Include="Views\Championship\Tables.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<mVoxApp.Web.Models.Team>
+
+@{
+    ViewBag.Title = "Tables";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tables</h2>
+
+<div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.points)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.keyGroup)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.flag)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.points)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.keyGroup)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.flag)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<hr /><br /><br /><br />
+<div>
+    <h2>Test passando varias Partial de uma vez</h2>
+
+    @{
+        if (ViewData["table1"] != null)
+        {
+            if (ViewData.Values != null && ViewData.Values.Count() > 0)
+            {
+                for (int i = 0; i < ViewData.Count(); i++)
+                {
+                    @Html.Partial("_TablePView", ViewData["table1"])
+
+                }
+            }
+        }
+    }
+
+</div>
+<div>
+    <h2>Test Passando Partial por vez</h2>
+    @Html.Partial("_TablePView", ViewData["table2"])
+</div>
+

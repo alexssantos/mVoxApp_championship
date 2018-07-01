@@ -19,6 +19,26 @@ namespace mVoxApp.Web.Controllers
             return View();
         }
 
+        public ActionResult Tables()
+        {
+            _mnger = new Manager();
+            List<string> _tablesChamp = new List<string>();
+               
+
+            foreach (var iTableChamp in _tablesChamp)
+            {
+                int numb = iTableChamp.IndexOf(iTableChamp) +1;
+                ViewData[$"iTable{numb}"] = _mnger.GetAll();
+            };
+
+            ViewData["table1"] = _mnger.GetAll();
+            ViewData["table2"] = _mnger.GetAll();
+            ViewData["table3"] = _mnger.GetAll();
+            ViewData["table4"] = _mnger.GetAll();
+
+            return View("Tables", _mnger.GetAll());
+        }
+
         // GET: Championship/Details/5
         public ActionResult Details(int id)
         {
@@ -32,7 +52,7 @@ namespace mVoxApp.Web.Controllers
             List<Team> listReturn = _mnger.GetAll();
             ViewData["TeamList"] = listReturn;
 
-            return View();
+            return View("Register");
         }
 
         // POST: Championship/Create
@@ -46,7 +66,7 @@ namespace mVoxApp.Web.Controllers
                 
                 //ViewBag.Msg = "Criado Com Sucesso";
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Register");
             }
             catch
             {
@@ -95,7 +115,7 @@ namespace mVoxApp.Web.Controllers
             {
                 _mnger = new Manager();
                 _mnger.Delete(id);
-                return RedirectToAction("Create");
+                return RedirectToAction("Register");
             }
             catch
             {
