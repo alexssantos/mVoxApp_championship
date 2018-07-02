@@ -7,55 +7,7 @@
 
 <h2>Tables</h2>
 
-<div>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.points)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.keyGroup)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.flag)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.points)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.keyGroup)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.flag)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                </td>
-            </tr>
-        }
-
-    </table>
-</div>
-
-<hr /><br /><br />
-<br />
+<hr /><br /><br /><br />
 <div>
     <h2 class="text-center">Test | Populando Paginas Dinamicamente</h2>
     @{
@@ -67,14 +19,14 @@
         {
             if (ViewData.Values != null && ViewData.Values.Count() > 0)
             {
-                for (int i = 0; i < count; i++)
+                for (int i = 1; i < count; i++)
                 {
-                    <hr /><br/><br /><br />
+                    <hr /><br/>
                     <hw>
-                        <h2 class="text-center">Group: @ViewData[$"keygroupname{i+1}"] </h2>
+                        <h2 class="text-center">Group @(i): @ViewData[$"keygroupname{i}"] </h2>
                     </hw>
 
-                    @Html.Partial("_TablePView", ViewData["table1"])
+                    @Html.Partial("_TablePView", ViewData[$"TeamsKeyGroup{i}"])
 
                 }
             }
@@ -86,6 +38,8 @@
 <hr /><br /><br /><br />
 <div >
     <h2 class="text-center">Test | Populando Paginas Estaticamente</h2>
+    <h4 class="text-center">Tabela KeyGroups</h4>
     @Html.Partial("_TablePView_keygroup", ViewData["keygroup1"])
 </div>
+
 

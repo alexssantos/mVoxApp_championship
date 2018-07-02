@@ -34,10 +34,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.flag)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            <td class="text-right">
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @Class = "btn btn-default" }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.id }, new { @Class = "btn btn-default" }) |
+                @Html.ActionLink("Excluir da Tabela", "Delete", new { id = item.id }, new { @Class = "btn btn-default btn-danger" })
             </td>
         </tr>
     }

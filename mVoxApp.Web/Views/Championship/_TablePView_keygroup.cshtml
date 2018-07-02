@@ -1,12 +1,6 @@
 ﻿@model IEnumerable<mVoxApp.Web.Models.KeyGroup>
 <hr /><br /><br /><br />
 
-<hw>
-    <h2 class="text-center">Table:@ViewData["keygroupname1"] </h2>
-</hw>
-
-<h3 class="text-center">Model First_Obj Name: @Model.First().name</h3>
-
 <table class="table">
     <tr>
         <th>
@@ -33,10 +27,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.totalTeams)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            <td class="text-right">
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @Class = "btn btn-default" }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.id }, new { @Class = "btn btn-default" }) |
+                @Html.ActionLink("Excluir da Tabela", "Delete", new { id = item.id }, new { @Class = "btn btn-default btn-danger" })
             </td>
         </tr>
     }
