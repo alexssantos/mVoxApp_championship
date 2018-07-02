@@ -212,6 +212,7 @@
     <Content Include="Views\Championship\Tables.cshtml" />
     <Content Include="Views\Championship\PartialView\_TablePView_keygroup.cshtml" />
     <Content Include="Views\Championship\Details.cshtml" />
+    <Content Include="Views\Shared\NotCreated.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -8,6 +8,9 @@ namespace mVoxApp.Web.Controllers.BLL
 {
     public class ConverterTeam
     {
+        /// <summary>
+        /// CASO CONVERTA A FORMAÇÃO DAS TABELAS PARA_MANY TO_MANY
+        /// </summary>
 
         public TeamViewModel ToViewModel(Team item)
         {

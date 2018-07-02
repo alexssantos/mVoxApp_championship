@@ -174,5 +174,10 @@ namespace mVoxApp.Web.Controllers
                 return View();
             }
         }
+
+        public ActionResult NotCreated()
+        {
+            return View("NotCreated");
+        }
     }
 }

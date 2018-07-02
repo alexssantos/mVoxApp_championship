@@ -8,6 +8,9 @@ namespace mVoxApp.Web.Controllers.BLL
 {
     public class ConverterKeygroup
     {
+        /// <summary>
+        /// CASO CONVERTA A FORMAÇÃO DAS TABELAS PARA_MANY TO_MANY
+        /// </summary>
 
         public KeyGroupViewModel ToViewModel(KeyGroup item)
         {

@@ -212,6 +212,31 @@ namespace mVoxApp.Web.App_Data.Repository
             return ListaRetorno;
         }
 
+        public KeyGroup GetKeyGroupByID(int id)
+        {
+            //CONECTA, QUERY, COMANDO
+            Conectar();
+            string query = "select * from keygroup where id = '{0}'";
+            query = string.Format(query, id);
+            conexao.ExecutarComando(query, true);
+
+            //MAPEAMENTO
+            List<KeyGroup> ListaRetorno = MappingKeygroup(conexao);
+
+            //Busca repetida
+            KeyGroup _teamRetorno;
+            if (ListaRetorno.Count > 1)
+            {
+                _teamRetorno = ListaRetorno.Find(x => x.id == id);
+            }
+            else
+            {
+                _teamRetorno = ListaRetorno.First();
+            }
+
+            return _teamRetorno;
+        }
+
         //Mapping TEAM
         private List<KeyGroup> MappingKeygroup(ConnectionDB conexao)
         {
