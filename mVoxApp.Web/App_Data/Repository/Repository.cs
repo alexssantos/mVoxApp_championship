@@ -45,7 +45,7 @@ namespace mVoxApp.Web.App_Data.Repository
                                              _team.flag,
                                              _team.keyGroup);
                 retorno = conexao.ExecutarComando(query, false);
-
+                //conexao.Fechar_Conexao();
             }
             catch (Exception ex)
             {
@@ -74,6 +74,7 @@ namespace mVoxApp.Web.App_Data.Repository
                                                  _team.keyGroup);
 
                 retorno = conexao.ExecutarComando(query, false);
+                //conexao.Fechar_Conexao();
             }
             catch (Exception ex)
             {
@@ -98,6 +99,7 @@ namespace mVoxApp.Web.App_Data.Repository
 
                 //paramentro FALSE - pq não é um SELECT para retornar obj.
                 retorno = conexao.ExecutarComando(query, false);
+                //conexao.Fechar_Conexao();
             }
             catch (Exception ex)
             {
@@ -117,7 +119,8 @@ namespace mVoxApp.Web.App_Data.Repository
 
             //MAPEAMENTO
             List<Team> ListaRetorno = MappingTeams(conexao);
-                  
+
+            //conexao.Fechar_Conexao();
             return ListaRetorno;
         }
         //---- BY ID
@@ -143,6 +146,7 @@ namespace mVoxApp.Web.App_Data.Repository
                _teamRetorno = ListaRetorno.First();
             }
 
+            //conexao.Fechar_Conexao();
             return _teamRetorno;
         } 
         //---- BY NAME
@@ -157,6 +161,7 @@ namespace mVoxApp.Web.App_Data.Repository
             //MAPEAMENTO
             List<Team> ListaRetorno = MappingTeams(conexao);
 
+            //conexao.Fechar_Conexao();
             return ListaRetorno;
         } 
         //---- BY DATE
@@ -170,7 +175,8 @@ namespace mVoxApp.Web.App_Data.Repository
 
             //MAPEAMENTO
             List<Team> ListaRetorno = MappingTeams(conexao);
-            
+
+            //conexao.Fechar_Conexao();
             return ListaRetorno;
         }
 
@@ -208,8 +214,9 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<KeyGroup> ListaRetorno = MappingKeygroup(conexao);                        
+            List<KeyGroup> ListaRetorno = MappingKeygroup(conexao);
 
+            //conexao.Fechar_Conexao();
             return ListaRetorno;
         }
 
@@ -235,6 +242,7 @@ namespace mVoxApp.Web.App_Data.Repository
                 _teamRetorno = ListaRetorno.First();
             }
 
+            //conexao.Fechar_Conexao();
             return _teamRetorno;
         }
 

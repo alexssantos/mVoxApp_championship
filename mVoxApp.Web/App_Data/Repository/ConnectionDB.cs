@@ -69,7 +69,7 @@ namespace mVoxApp.Web.App_Data.Repository
 
             if (obj_conexao.State == ConnectionState.Open)
             {
-                obj_conexao.ConnectionString = var_StrConexao;
+                //obj_conexao.ConnectionString = var_StrConexao;
                 obj_conexao.Close();
             }
         }

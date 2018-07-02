@@ -73,15 +73,17 @@ namespace mVoxApp.Web.Controllers
             try
             {
                 _mnger = new Manager();
+                _mngerKey = new ManagerKeygroup();
+
                 Team _team = _mnger.GetByID(id);
                 int nextKeyGroup = _team.keyGroup + 1;
 
                 if (!_mngerKey.KeyGroupFull(nextKeyGroup))
                 {
                     _team.keyGroup = _team.keyGroup + 1;
+                    _team.allKeyGroups.Clear();
                     for (int i = 1; i <= _team.keyGroup; i++)
-                    {
-                        _team.allKeyGroups.Clear();
+                    {                        
                         _team.allKeyGroups.Add(i);
                     }
                     _mnger.Update(_team);

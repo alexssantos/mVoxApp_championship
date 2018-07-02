@@ -23,7 +23,12 @@ namespace mVoxApp.Web.Models
         public int keyGroup { get; set; }
 
         public List<int> allKeyGroups{ get; set; }
-        public string flag { get; set; }        
+        public string flag { get; set; }
+
+        public Team()
+        {
+            allKeyGroups = new List<int>();
+        }
     }
 
     public class TeamViewModel
