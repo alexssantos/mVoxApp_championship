@@ -5,15 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
 <div>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h3> + Time </h3>
+        <h3> + Adicionar Time </h3>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -58,7 +56,7 @@
     }
 </div>
 <div>
-    @Html.Partial("_TeamList", ViewData["TeamList"])
+    @Html.Partial("PartialView/_TeamList", ViewData["TeamList"])
 </div>
 <hr />
 <div class="btn btn-default btn-lg">

@@ -58,7 +58,7 @@ namespace mVoxApp.Web.Controllers
                 ViewData[$"KeyGroup{i}"] = _mngerKey.GetAll().OrderBy(x=>x.id);
             }
             //ViewData Dinamic [KeyGroupName1] (Strings)  ---- pegar parametro NAME de cada OBJETO dentro da lista
-            int count = 1;
+            int count = 1; 
             foreach (var item in _listKeygroups)
             {                
                 ViewData[$"KeyGroupName{count}"] = item.name;
@@ -71,7 +71,27 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            _mnger = new Manager();
+            Team team = _mnger.GetByID(id);
+            return View(team);
+        }
+        
+        // GET: Championship/Details/5
+        public ActionResult ChangeKeyGroup(int id)
+        {
+            try
+            {
+                _mnger = new Manager();
+                Team _team = _mnger.GetByID(id);
+                _team.keyGroup = 1;
+
+                _mnger.Update(_team);
+                return RedirectToAction("Tables");
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
 
         // GET: Championship/Create

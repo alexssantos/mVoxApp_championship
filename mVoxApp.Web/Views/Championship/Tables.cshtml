@@ -5,16 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Tables</h2>
-
-<hr /><br /><br /><br />
+<hr />
 <div>
-    <h2 class="text-center">Test | Populando Paginas Dinamicamente</h2>
     @{
-        int count = 0;
+        int count = 1;
         foreach (var item in ViewData["keygroupAll"] as IEnumerable<mVoxApp.Web.Models.KeyGroup>) { count++; }
     
-        <h5 class="text-center">Quantidade de KeyGroups no Banco: @count</h5>    
+        <h5 class="text-center">Quantidade de KeyGroups no Banco: @(count-1)</h5>    
         if (ViewData["table1"] != null)
         {
             if (ViewData.Values != null && ViewData.Values.Count() > 0)
@@ -26,20 +23,19 @@
                         <h2 class="text-center">Group @(i): @ViewData[$"keygroupname{i}"] </h2>
                     </hw>
 
-                    @Html.Partial("_TablePView", ViewData[$"TeamsKeyGroup{i}"])
+                    @Html.Partial("PartialView/_TablePView", ViewData[$"TeamsKeyGroup{i}"])
 
                 }
             }
         }
     }
-
 </div>
 
 <hr /><br /><br /><br />
 <div >
-    <h2 class="text-center">Test | Populando Paginas Estaticamente</h2>
-    <h4 class="text-center">Tabela KeyGroups</h4>
-    @Html.Partial("_TablePView_keygroup", ViewData["keygroup1"])
+    
+    <h2 class="text-center">Tabela KeyGroups</h2>
+    @Html.Partial("PartialView/_TablePView_keygroup", ViewData["keygroup1"])
 </div>
 
 

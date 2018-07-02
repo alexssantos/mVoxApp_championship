@@ -203,14 +203,15 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Championship\About.cshtml" />
     <Content Include="Views\Championship\Contact.cshtml" />
-    <Content Include="Views\Championship\_TeamList.cshtml" />
+    <Content Include="Views\Championship\PartialView\_TeamList.cshtml" />
     <Content Include="Views\Championship\Register.cshtml" />
     <Content Include="Views\Championship\Index.cshtml" />
     <Content Include="Views\Championship\Edit.cshtml" />
     <Content Include="Views\Championship\Delete.cshtml" />
-    <Content Include="Views\Championship\_TablePView.cshtml" />
+    <Content Include="Views\Championship\PartialView\_TablePView.cshtml" />
     <Content Include="Views\Championship\Tables.cshtml" />
-    <Content Include="Views\Championship\_TablePView_keygroup.cshtml" />
+    <Content Include="Views\Championship\PartialView\_TablePView_keygroup.cshtml" />
+    <Content Include="Views\Championship\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
