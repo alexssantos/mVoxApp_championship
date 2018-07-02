@@ -21,6 +21,8 @@ namespace mVoxApp.Web.Models
         [Required(ErrorMessage = "Informe o número do Grupo")]
         [Display(Name = "Chave do Grupo")]
         public int keyGroup { get; set; }
+
+        public List<int> allKeyGroups{ get; set; }
         public string flag { get; set; }        
     }
 

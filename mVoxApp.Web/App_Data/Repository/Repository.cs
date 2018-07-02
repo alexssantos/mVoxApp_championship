@@ -45,6 +45,7 @@ namespace mVoxApp.Web.App_Data.Repository
                                              _team.flag,
                                              _team.keyGroup);
                 retorno = conexao.ExecutarComando(query, false);
+
             }
             catch (Exception ex)
             {
