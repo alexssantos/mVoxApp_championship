@@ -57,7 +57,7 @@
 <hr /><br /><br />
 <br />
 <div>
-    <h2 class="text-center">Test passando varias Partial de uma vez</h2>
+    <h2 class="text-center">Test | Populando Paginas Dinamicamente</h2>
     @{
         int count = 0;
         foreach (var item in ViewData["keygroupAll"] as IEnumerable<mVoxApp.Web.Models.KeyGroup>) { count++; }
@@ -85,7 +85,7 @@
 
 <hr /><br /><br /><br />
 <div >
-    <h2 class="text-center">Test Passando Partial por vez</h2>
+    <h2 class="text-center">Test | Populando Paginas Estaticamente</h2>
     @Html.Partial("_TablePView_keygroup", ViewData["keygroup1"])
 </div>
 

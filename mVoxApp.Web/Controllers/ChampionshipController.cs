@@ -20,6 +20,16 @@ namespace mVoxApp.Web.Controllers
             return View();
         }
 
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
         public ActionResult Tables()
         {
             _mnger = new Manager();
@@ -80,7 +90,7 @@ namespace mVoxApp.Web.Controllers
                 
                 //ViewBag.Msg = "Criado Com Sucesso";
 
-                return RedirectToAction("Register");
+                return View("Index");
             }
             catch
             {
