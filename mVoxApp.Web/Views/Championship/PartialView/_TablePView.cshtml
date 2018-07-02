@@ -40,6 +40,7 @@
                     <td class="text-right">
                         @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @Class = "btn btn-default" }) |
                         @Html.ActionLink("Detalhes", "Details", new { id = item.id }, new { @Class = "btn btn-default" }) |
+                        @Html.ActionLink(" Venceu Jogo ", "Details", new { id = item.id }, new { @Class = "btn btn-success" }) |
                         @if (item.keyGroup > 1)
                         {
                              @Html.ActionLink("Excluir da Tabela", "ChangeKeyGroup", new { id = item.id }, new { @Class = "btn btn-default btn-danger" })
