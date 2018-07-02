@@ -68,6 +68,23 @@ namespace mVoxApp.Web.Controllers
             return View("Tables", _mnger.GetAll());
         }
 
+        public ActionResult WonGame(int id)
+        {
+            try
+            {
+                _mnger = new Manager();
+                Team _team = _mnger.GetByID(id);
+                _team.keyGroup = _team.keyGroup+1;
+
+                _mnger.Update(_team);
+                return RedirectToAction("Tables");
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
+
         // GET: Championship/Details/5
         public ActionResult Details(int id)
         {
@@ -77,7 +94,7 @@ namespace mVoxApp.Web.Controllers
         }
         
         // GET: Championship/Details/5
-        public ActionResult ChangeKeyGroup(int id)
+        public ActionResult DeleteFromKeyGroup(int id)
         {
             try
             {
