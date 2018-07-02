@@ -12,7 +12,7 @@ namespace mVoxApp.Web.App_Data.Repository
     {
         #region DECLARAÇÕES Globais
 
-        private SqlConnection   obj_conexao = null;
+        public  SqlConnection   obj_conexao = null;
         private SqlCommand      obj_comando = null;
         public  SqlDataReader   obj_DataReader = null;
         private SqlDataAdapter  obj_DataAdapter = null;
