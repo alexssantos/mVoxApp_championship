@@ -32,38 +32,44 @@ namespace mVoxApp.Web.Controllers
 
         public ActionResult Tables()
         {
-            //Teams
+            //Teams     --------------------------------
             _mnger = new Manager();
+            List<Team> _listTeams = _mnger.GetAll();
             
 
-            //Keygroup --------------------------------
+            //Keygroup  --------------------------------
             _mngerKey = new ManagerKeygroup();
             List<KeyGroup> _listKeygroups = _mngerKey.GetAll().OrderBy(x=>x.id).ToList();
 
-            //ViewData -----------------------------------
+            //--------- VIEWDATA ----------------//
+            #region ViewData's
+
             ViewData["keygroupAll"] = _listKeygroups;
-            ViewData["table1"] = _mnger.GetAll();
-            ViewData["table2"] = _mnger.GetAll();
+            ViewData["table1"] = _listTeams;
+            ViewData["table2"] = _listTeams;
 
             ViewBag.TableTitle = "ViewBab-Title";
 
-            //ViewData Dinamic [TeamKeyGroup1] (List<Team>)
-            for (int i = 1; i <= _mngerKey.GetAll().Count(); i++)
+            //ViewData DINAMIC // [TeamKeyGroup1] (List<Team>)  // 
+            for (int i = 1; i <= _listKeygroups.Count(); i++)
             {
-                ViewData[$"TeamsKeyGroup{i}"] = _mnger.GetAll().FindAll(x => x.keyGroup == i).ToList();
+                ViewData[$"TeamsKeyGroup{i}"] = _listTeams.FindAll(x => x.keyGroup == i).ToList();
             }
-            //ViewData Dinamic [KeyGroup1] (List<KeyGrupo>) ----- pegar cada OBJETO da lista
+            //ViewData DINAMIC // [KeyGroup1] (List<KeyGrupo>)  // ----- pegar cada OBJETO da lista
             for (int i = 1; i < _listKeygroups.Count; i++)
             {
-                ViewData[$"KeyGroup{i}"] = _mngerKey.GetAll().OrderBy(x=>x.id);
+                ViewData[$"KeyGroup{i}"] = _listKeygroups.OrderBy(x=>x.id);
+
             }
-            //ViewData Dinamic [KeyGroupName1] (Strings)  ---- pegar parametro NAME de cada OBJETO dentro da lista
+            //ViewData DINAMIC // [KeyGroupName1] (Strings)     // ---- pegar parametro NAME de cada OBJETO dentro da lista
             int count = 1; 
             foreach (var item in _listKeygroups)
             {                
                 ViewData[$"KeyGroupName{count}"] = item.name;
                 count++;
-            }            
+            }
+
+            #endregion
 
             return View("Tables", _mnger.GetAll());
         }
