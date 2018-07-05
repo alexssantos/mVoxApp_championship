@@ -98,7 +98,9 @@ namespace mVoxApp.Web.Controllers.BLL
 
         public int KeyGroupTeamCounter()
         {
-            int count;
+            int count = 0;
+
+            return count;
 
         }
 
