@@ -15,14 +15,11 @@ namespace mVoxApp.Web.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [Display(Name = "Pontos")]
-        public int Points { get; set; }
-
         //Caso torneio comece por Pontos
         [Required(ErrorMessage = "Informe o número do Grupo")]
         [Display(Name = "Chave do Grupo")]
         public int KeyGroup { get; set; }
 
-        public string Flag { get; set; }                
+        public bool Winner { get; set; }                
     }
 }

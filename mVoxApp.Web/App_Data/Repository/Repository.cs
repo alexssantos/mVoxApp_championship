@@ -285,7 +285,7 @@ namespace mVoxApp.Web.App_Data.Repository
             return _teamRetorno;
         }
 
-        //Mapping TEAM
+        //Mapping KeyGroups
         private List<KeyGroupModel> MappingKeygroup(ConnectionDB conexao)
         {
             List<KeyGroupModel> ListaRetorno = new List<KeyGroupModel>();
