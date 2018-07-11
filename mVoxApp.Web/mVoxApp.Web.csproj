@@ -146,7 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Repository\StaticListRepository.cs" />
-    <Compile Include="App_Data\Repository\Repository.cs" />
+    <Compile Include="App_Data\Repository\DB_Repository.cs" />
     <Compile Include="App_Data\Repository\ConnectionDB.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace mVoxApp.Web.App_Data.Repository
 {
-    public class Repository
+    public class DB_Repository
     {
         /// <summary>
         /// 1. Metodo Connect_BD
@@ -132,6 +132,7 @@ namespace mVoxApp.Web.App_Data.Repository
 
             return ListaRetorno;
         }
+
         //---- BY ID
         public TeamModel GetTeamByID(int id)
         {
@@ -166,6 +167,7 @@ namespace mVoxApp.Web.App_Data.Repository
             //conexao.Fechar_Conexao();
             return _teamRetorno;
         }
+
         //---- BY NAME
         public List<TeamModel> GetTeamBySTRING(string busca)
         {
@@ -188,6 +190,7 @@ namespace mVoxApp.Web.App_Data.Repository
             //conexao.Fechar_Conexao();
             return ListaRetorno;
         }
+
         //---- BY DATE
         public List<TeamModel> GetTeamByDATE(DateTime createdIn_Date)
         {
@@ -209,10 +212,9 @@ namespace mVoxApp.Web.App_Data.Repository
             }
             return ListaRetorno;
         }
-
         #endregion
 
-        //Mapping TEAM
+        //TEAM Mapping
         private List<TeamModel> MappingTeams(ConnectionDB conexao)
         {
             List<TeamModel> ListaRetorno = new List<TeamModel>();

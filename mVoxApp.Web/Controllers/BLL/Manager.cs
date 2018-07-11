@@ -11,11 +11,11 @@ namespace mVoxApp.Web.Controllers.BLL
     #region DB Team
     public class ManagerTeamRepository
     {
-        Repository _rep;        
+        DB_Repository _rep;        
 
         public List<TeamModel> GetAll()
         {
-            _rep = new Repository();
+            _rep = new DB_Repository();
             List<TeamModel> _retorno = _rep.GetTeams();
             _retorno = _retorno.OrderBy(x => x.Name).ToList();
 
@@ -24,7 +24,7 @@ namespace mVoxApp.Web.Controllers.BLL
 
         public TeamModel GetByID(int id)
         {
-            _rep = new Repository();
+            _rep = new DB_Repository();
             TeamModel _retorno = _rep.GetTeamByID(id);
 
             return _retorno;
@@ -32,7 +32,7 @@ namespace mVoxApp.Web.Controllers.BLL
 
         public List<TeamModel> GetByName(string teamName)
         {
-            _rep = new Repository();
+            _rep = new DB_Repository();
             List<TeamModel> _retorno = _rep.GetTeamBySTRING(teamName);
 
             return _retorno;
@@ -40,7 +40,7 @@ namespace mVoxApp.Web.Controllers.BLL
 
         public bool Create(TeamModel team)
         {
-            _rep = new Repository();
+            _rep = new DB_Repository();
             bool retornoCreate = _rep.CreateTeam_DB(team);
 
             return retornoCreate;
@@ -48,7 +48,7 @@ namespace mVoxApp.Web.Controllers.BLL
 
         public bool Update(TeamModel _team)
         {
-            _rep = new Repository();
+            _rep = new DB_Repository();
             bool retornoDel = _rep.DeleteTeam_DB(_team.Id);
             bool retornoAdd = _rep.CreateTeam_DB(_team);
 
@@ -64,7 +64,7 @@ namespace mVoxApp.Web.Controllers.BLL
 
         public bool Delete(int id)
         {
-            _rep = new Repository();
+            _rep = new DB_Repository();
             bool retorno = _rep.DeleteTeam_DB(id);
             return retorno;
         }
@@ -74,11 +74,11 @@ namespace mVoxApp.Web.Controllers.BLL
     #region DB KeyGroup
     public class ManagerKeygroupRepository
     {
-        Repository _rep;
+        DB_Repository _rep;
 
         public List<KeyGroupModel> GetAll()
         {
-            _rep = new Repository();
+            _rep = new DB_Repository();
             List<KeyGroupModel> ListaTodos = _rep.GetKeyGroups();
             List<KeyGroupModel> _returo = ListaTodos.OrderBy(x => x.Name).ToList();
 
@@ -87,7 +87,7 @@ namespace mVoxApp.Web.Controllers.BLL
 
         //public bool KeyGroupFull(int id)
         //{
-        //    _rep = new Repository();
+        //    _rep = new DB_Repository();
         //    KeyGroupModel _kGroup = _rep.GetKeyGroupByID(id);
         //    if (_kGroup.MaxTeams > _kGroup.TotalTeams)
         //    {
@@ -112,12 +112,13 @@ namespace mVoxApp.Web.Controllers.BLL
     public class ManagerStaticRepository
     {
         StaticListRepository _staticRep;
+        List<TeamModel> retorno;
 
 
         //----------STATIC CRUD TEAM ----------//
         public List<TeamModel> GetAllTeam()
         {
-
+            return retorno;
         }
     }
 

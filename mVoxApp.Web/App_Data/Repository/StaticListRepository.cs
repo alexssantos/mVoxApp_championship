@@ -14,15 +14,11 @@ namespace mVoxApp.Web.App_Data.Repository
         static List<MatchModel>     StaticListMatch;
         static List<TeamModel>      StaticListTeams;
 
-        Repository _repy = new Repository();
-
         public StaticListRepository()
         {
             if (StaticListTeams == null)
             {
                 StaticListTeams = new List<TeamModel>();
-                StaticListTeams = _repy.
-
             }
             if (StaticListGroups == null)
             {
