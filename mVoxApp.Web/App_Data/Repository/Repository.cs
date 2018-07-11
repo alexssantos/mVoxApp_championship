@@ -31,7 +31,7 @@ namespace mVoxApp.Web.App_Data.Repository
         #region CRUD TEAM
 
         //CREATE
-        public bool Create_DB(Team _team)
+        public bool CreateTeam_DB(TeamModel _team)
         {
             bool retorno = false;
             Conectar();
@@ -44,9 +44,9 @@ namespace mVoxApp.Web.App_Data.Repository
                       " (name , flag, keygroup) " +
                       " values " +
                       " ('{0}','{1}','{2}')";
-                    query = string.Format(query, _team.name,
-                                                 _team.flag,
-                                                 _team.keyGroup);
+                    query = string.Format(query, _team.Name,
+                                                 _team.Flag,
+                                                 _team.KeyGroup);
                     retorno = conexao.ExecutarComando(query, false);
                 }                            
             }
@@ -58,7 +58,7 @@ namespace mVoxApp.Web.App_Data.Repository
         }
 
         //UPDATE
-        public bool Update_DB(Team _team)
+        public bool UpdateTeam_DB(TeamModel _team)
         {
             bool retorno = false;
             Conectar();
@@ -71,10 +71,10 @@ namespace mVoxApp.Web.App_Data.Repository
                                                  keygroup = '{3}',                                      
                                where id = '{0}'";
 
-                    query = string.Format(query, _team.id,
-                                                     _team.name,
-                                                     _team.flag,
-                                                     _team.keyGroup);
+                    query = string.Format(query, _team.Id,
+                                                     _team.Name,
+                                                     _team.Flag,
+                                                     _team.KeyGroup);
 
                     retorno = conexao.ExecutarComando(query, false);
                 }               
@@ -87,7 +87,7 @@ namespace mVoxApp.Web.App_Data.Repository
         }
 
         //DELETE
-        public bool Delete_DB(int id)
+        public bool DeleteTeam_DB(int id)
         {
             bool retorno = false;
             Conectar();
@@ -113,11 +113,11 @@ namespace mVoxApp.Web.App_Data.Repository
         }
 
         //READ ------------------------------
-        public List<Team> GetTeams()
+        public List<TeamModel> GetTeams()
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
-            List<Team> ListaRetorno;
+            List<TeamModel> ListaRetorno;
 
             using (conexao.obj_conexao = new System.Data.SqlClient.SqlConnection(conexao.string_Conexao))
             {
@@ -130,33 +130,14 @@ namespace mVoxApp.Web.App_Data.Repository
             }            
 
             return ListaRetorno;
-        }
-        //READ ------------------------------
-        public List<Team> GetTeams_BackUp()
-        {
-            //CONECTA, QUERY, COMANDO
-            Conectar();
-            List<Team> ListaRetorno;
-            using (conexao.obj_conexao = new System.Data.SqlClient.SqlConnection(conexao.string_Conexao))
-            {
-                conexao.obj_conexao.Open();
-
-                string query = "SELECT * FROM team";
-                conexao.ExecutarComando(query, true);
-
-                //MAPEAMENTO
-                ListaRetorno = MappingTeams(conexao);
-            }           
-
-            return ListaRetorno;
-        }
+        }      
         //---- BY ID
-        public Team GetByID(int id)
+        public TeamModel GetTeamByID(int id)
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
-            List<Team> ListaRetorno;
-            Team _teamRetorno;
+            List<TeamModel> ListaRetorno;
+            TeamModel _teamRetorno;
             using (conexao.obj_conexao = new System.Data.SqlClient.SqlConnection(conexao.string_Conexao))
             {
                 conexao.obj_conexao.Open();
@@ -172,7 +153,7 @@ namespace mVoxApp.Web.App_Data.Repository
                 
                 if (ListaRetorno.Count > 1)
                 {
-                    _teamRetorno = ListaRetorno.Find(x => x.id == id);
+                    _teamRetorno = ListaRetorno.Find(x => x.Id == id);
                 }
                 else
                 {
@@ -185,11 +166,11 @@ namespace mVoxApp.Web.App_Data.Repository
             return _teamRetorno;
         } 
         //---- BY NAME
-        public List<Team> GetBySTRING(string busca)
+        public List<TeamModel> GetTeamBySTRING(string busca)
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
-            List<Team> ListaRetorno;
+            List<TeamModel> ListaRetorno;
             using (conexao.obj_conexao = new System.Data.SqlClient.SqlConnection(conexao.string_Conexao))
             {
                 conexao.obj_conexao.Open();
@@ -207,11 +188,11 @@ namespace mVoxApp.Web.App_Data.Repository
             return ListaRetorno;
         } 
         //---- BY DATE
-        public List<Team> DetByDATE(DateTime createdIn_Date)
+        public List<TeamModel> GetTeamByDATE(DateTime createdIn_Date)
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
-            List<Team> ListaRetorno;
+            List<TeamModel> ListaRetorno;
 
             using (conexao.obj_conexao = new System.Data.SqlClient.SqlConnection(conexao.string_Conexao))
             {
@@ -231,20 +212,20 @@ namespace mVoxApp.Web.App_Data.Repository
         #endregion
 
         //Mapping TEAM
-        private List<Team> MappingTeams(ConnectionDB conexao)
+        private List<TeamModel> MappingTeams(ConnectionDB conexao)
         {
-            List<Team> ListaRetorno = new List<Team>();
-            Team aux = null;
+            List<TeamModel> ListaRetorno = new List<TeamModel>();
+            TeamModel aux = null;
 
             if (conexao.obj_DataReader.HasRows)
             {
                 while (conexao.obj_DataReader.Read())
                 {
-                    aux = new Team();
-                    aux.id = (int)conexao.obj_DataReader["id"];
-                    aux.name = conexao.obj_DataReader["name"].ToString();
-                    aux.keyGroup = (int)conexao.obj_DataReader["keygroup"];
-                    aux.flag = conexao.obj_DataReader["flag"].ToString();
+                    aux = new TeamModel();
+                    aux.Id = (int)conexao.obj_DataReader["id"];
+                    aux.Name = conexao.obj_DataReader["name"].ToString();
+                    aux.KeyGroup = (int)conexao.obj_DataReader["keygroup"];
+                    aux.Flag = conexao.obj_DataReader["flag"].ToString();
 
                     ListaRetorno.Add(aux);
                 }
@@ -254,11 +235,11 @@ namespace mVoxApp.Web.App_Data.Repository
 
         //-----------------------KeyGorup ---------------------------
 
-        public List<KeyGroup> GetKeyGroups()
+        public List<KeyGroupModel> GetKeyGroups()
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
-            List<KeyGroup> ListaRetorno;
+            List<KeyGroupModel> ListaRetorno;
 
             using (conexao.obj_conexao = new System.Data.SqlClient.SqlConnection(conexao.string_Conexao))
             {
@@ -273,12 +254,12 @@ namespace mVoxApp.Web.App_Data.Repository
             return ListaRetorno;
         }
 
-        public KeyGroup GetKeyGroupByID(int id)
+        public KeyGroupModel GetKeyGroupByID(int id)
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
-            List<KeyGroup> ListaRetorno;
-            KeyGroup _teamRetorno;
+            List<KeyGroupModel> ListaRetorno;
+            KeyGroupModel _teamRetorno;
             using (conexao.obj_conexao = new System.Data.SqlClient.SqlConnection(conexao.string_Conexao))
             {
                 conexao.obj_conexao.Open();
@@ -294,7 +275,7 @@ namespace mVoxApp.Web.App_Data.Repository
                 
                 if (ListaRetorno.Count > 1)
                 {
-                    _teamRetorno = ListaRetorno.Find(x => x.id == id);
+                    _teamRetorno = ListaRetorno.Find(x => x.Id == id);
                 }
                 else
                 {
@@ -305,18 +286,18 @@ namespace mVoxApp.Web.App_Data.Repository
         }
 
         //Mapping TEAM
-        private List<KeyGroup> MappingKeygroup(ConnectionDB conexao)
+        private List<KeyGroupModel> MappingKeygroup(ConnectionDB conexao)
         {
-            List<KeyGroup> ListaRetorno = new List<KeyGroup>();
-            KeyGroup aux = null;
+            List<KeyGroupModel> ListaRetorno = new List<KeyGroupModel>();
+            KeyGroupModel aux = null;
 
             if (conexao.obj_DataReader.HasRows)
             {
                 while (conexao.obj_DataReader.Read())
                 {
-                    aux = new KeyGroup();
-                    aux.id = (int)conexao.obj_DataReader["id"];
-                    aux.name = conexao.obj_DataReader["name"].ToString();
+                    aux = new KeyGroupModel();
+                    aux.Id = (int)conexao.obj_DataReader["id"];
+                    aux.Name = conexao.obj_DataReader["name"].ToString();
                     aux.maxTeams = (int)conexao.obj_DataReader["maxteams"];
                     aux.totalTeams = (int)conexao.obj_DataReader["totalteams"];                    
 
@@ -330,7 +311,7 @@ namespace mVoxApp.Web.App_Data.Repository
 
         #region Backup Methods
        
-        public bool Create_DB_Backup(Team _team)
+        public bool Create_DB_Backup(TeamModel _team)
         {
             bool retorno = false;
             try
@@ -340,9 +321,9 @@ namespace mVoxApp.Web.App_Data.Repository
                        " (name , flag, keygroup) " +
                        " values " +
                        " ('{0}','{1}','{2}')";
-                query = string.Format(query, _team.name,
-                                             _team.flag,
-                                             _team.keyGroup);
+                query = string.Format(query, _team.Name,
+                                             _team.Flag,
+                                             _team.KeyGroup);
                 retorno = conexao.ExecutarComando(query, false);
 
             }
@@ -355,7 +336,7 @@ namespace mVoxApp.Web.App_Data.Repository
         }
 
         //UPDATE
-        public bool Update_DB_Backup(Team _team)
+        public bool Update_DB_Backup(TeamModel _team)
         {
             bool retorno = false;
             try
@@ -367,10 +348,10 @@ namespace mVoxApp.Web.App_Data.Repository
                                                  keygroup = '{3}',                                      
                                where id = '{0}'";
 
-                query = string.Format(query, _team.id,
-                                                 _team.name,
-                                                 _team.flag,
-                                                 _team.keyGroup);
+                query = string.Format(query, _team.Id,
+                                                 _team.Name,
+                                                 _team.Flag,
+                                                 _team.KeyGroup);
 
                 retorno = conexao.ExecutarComando(query, false);
                 //conexao.Fechar_Conexao();
@@ -409,11 +390,11 @@ namespace mVoxApp.Web.App_Data.Repository
         }
 
         //READ ------------------------------
-        public List<Team> GetTeams_Backup()
+        public List<TeamModel> GetTeams_Backup()
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
-            List<Team> ListaRetorno;
+            List<TeamModel> ListaRetorno;
 
             using (conexao.obj_conexao = new System.Data.SqlClient.SqlConnection(conexao.string_Conexao))
             {
@@ -429,7 +410,7 @@ namespace mVoxApp.Web.App_Data.Repository
             return ListaRetorno;
         }       
         //---- BY ID
-        public Team GetByID_Backup(int id)
+        public TeamModel GetByID_Backup(int id)
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
@@ -438,13 +419,13 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<Team> ListaRetorno = MappingTeams(conexao);
+            List<TeamModel> ListaRetorno = MappingTeams(conexao);
 
             //Busca repetida
-            Team _teamRetorno;
+            TeamModel _teamRetorno;
             if (ListaRetorno.Count > 1)
             {
-                _teamRetorno = ListaRetorno.Find(x => x.id == id);
+                _teamRetorno = ListaRetorno.Find(x => x.Id == id);
             }
             else
             {
@@ -455,7 +436,7 @@ namespace mVoxApp.Web.App_Data.Repository
             return _teamRetorno;
         }
         //---- BY NAME
-        public List<Team> GetBySTRING_Backup(string busca)
+        public List<TeamModel> GetBySTRING_Backup(string busca)
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
@@ -464,13 +445,13 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<Team> ListaRetorno = MappingTeams(conexao);
+            List<TeamModel> ListaRetorno = MappingTeams(conexao);
 
             //conexao.Fechar_Conexao();
             return ListaRetorno;
         }
         //---- BY DATE
-        public List<Team> DetByDATE_Backup(DateTime createdIn_Date)
+        public List<TeamModel> DetByDATE_Backup(DateTime createdIn_Date)
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
@@ -479,7 +460,7 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<Team> ListaRetorno = MappingTeams(conexao);
+            List<TeamModel> ListaRetorno = MappingTeams(conexao);
 
             //conexao.Fechar_Conexao();
             return ListaRetorno;
@@ -488,7 +469,7 @@ namespace mVoxApp.Web.App_Data.Repository
 
         //-----------------------KeyGorup ---------------------------
 
-        public List<KeyGroup> GetKeyGroups_Backup()
+        public List<KeyGroupModel> GetKeyGroups_Backup()
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
@@ -496,13 +477,13 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<KeyGroup> ListaRetorno = MappingKeygroup(conexao);
+            List<KeyGroupModel> ListaRetorno = MappingKeygroup(conexao);
 
             //conexao.Fechar_Conexao();
             return ListaRetorno;
         }
 
-        public KeyGroup GetKeyGroupByID_Backup(int id)
+        public KeyGroupModel GetKeyGroupByID_Backup(int id)
         {
             //CONECTA, QUERY, COMANDO
             Conectar();
@@ -511,13 +492,13 @@ namespace mVoxApp.Web.App_Data.Repository
             conexao.ExecutarComando(query, true);
 
             //MAPEAMENTO
-            List<KeyGroup> ListaRetorno = MappingKeygroup(conexao);
+            List<KeyGroupModel> ListaRetorno = MappingKeygroup(conexao);
 
             //Busca repetida
-            KeyGroup _teamRetorno;
+            KeyGroupModel _teamRetorno;
             if (ListaRetorno.Count > 1)
             {
-                _teamRetorno = ListaRetorno.Find(x => x.id == id);
+                _teamRetorno = ListaRetorno.Find(x => x.Id == id);
             }
             else
             {

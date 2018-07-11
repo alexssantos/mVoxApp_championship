@@ -1,4 +1,4 @@
-﻿@model IEnumerable<mVoxApp.Web.Models.Team>
+﻿@model IEnumerable<mVoxApp.Web.Models.TeamModel>
 
 @{
     ViewBag.Title = "Tables";
@@ -11,8 +11,8 @@
 <div>
     @{
         int count = 1;
-        foreach (var item in ViewData["keygroupAll"] as IEnumerable<mVoxApp.Web.Models.KeyGroup>) { count++; }
-    
+        foreach (var item in ViewData["keygroupAll"] as IEnumerable<mVoxApp.Web.Models.KeyGroupModel>) { count++; }
+
         <h5 class="text-center">Quantidade de KeyGroups no Banco: @(count-1)</h5>    
         if (ViewData["table1"] != null)
         {

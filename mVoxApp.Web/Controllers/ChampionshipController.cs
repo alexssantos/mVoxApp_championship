@@ -11,8 +11,8 @@ namespace mVoxApp.Web.Controllers
 {
     public class ChampionshipController : Controller
     {
-        Manager _mnger;
-        ManagerKeygroup _mngerKey;
+        ManagerTeamRepository _mnger;
+        ManagerKeygroupRepository _mngerKey;
 
         // GET: Championship
         public ActionResult Index()
@@ -33,13 +33,13 @@ namespace mVoxApp.Web.Controllers
         public ActionResult Tables()
         {
             //Teams     --------------------------------
-            _mnger = new Manager();
-            List<Team> _listTeams = _mnger.GetAll();
+            _mnger = new ManagerTeamRepository();
+            List<TeamModel> _listTeams = _mnger.GetAll();
             
 
             //Keygroup  --------------------------------
-            _mngerKey = new ManagerKeygroup();
-            List<KeyGroup> _listKeygroups = _mngerKey.GetAll().OrderBy(x=>x.id).ToList();
+            _mngerKey = new ManagerKeygroupRepository();
+            List<KeyGroupModel> _listKeygroups = _mngerKey.GetAll().OrderBy(x=>x.Id).ToList();
 
             //--------- VIEWDATA ----------------//
             #region ViewData's
@@ -53,19 +53,19 @@ namespace mVoxApp.Web.Controllers
             //ViewData DINAMIC // [TeamKeyGroup1] (List<Team>)  // 
             for (int i = 1; i <= _listKeygroups.Count(); i++)
             {
-                ViewData[$"TeamsKeyGroup{i}"] = _listTeams.FindAll(x => x.keyGroup == i).ToList();
+                ViewData[$"TeamsKeyGroup{i}"] = _listTeams.FindAll(x => x.KeyGroup == i).ToList();
             }
             //ViewData DINAMIC // [KeyGroup1] (List<KeyGrupo>)  // ----- pegar cada OBJETO da lista
             for (int i = 1; i < _listKeygroups.Count; i++)
             {
-                ViewData[$"KeyGroup{i}"] = _listKeygroups.OrderBy(x=>x.id);
+                ViewData[$"KeyGroup{i}"] = _listKeygroups.OrderBy(x=>x.Id);
 
             }
             //ViewData DINAMIC // [KeyGroupName1] (Strings)     // ---- pegar parametro NAME de cada OBJETO dentro da lista
             int count = 1; 
             foreach (var item in _listKeygroups)
             {                
-                ViewData[$"KeyGroupName{count}"] = item.name;
+                ViewData[$"KeyGroupName{count}"] = item.Name;
                 count++;
             }
 
@@ -78,17 +78,17 @@ namespace mVoxApp.Web.Controllers
         {
             try
             {
-                _mnger = new Manager();
-                _mngerKey = new ManagerKeygroup();
+                _mnger = new ManagerTeamRepository();
+                _mngerKey = new ManagerKeygroupRepository();
 
-                Team _team = _mnger.GetByID(id);
-                int nextKeyGroup = _team.keyGroup + 1;
+                TeamModel _team = _mnger.GetByID(id);
+                int nextKeyGroup = _team.KeyGroup + 1;
 
                 if (!_mngerKey.KeyGroupFull(nextKeyGroup))
                 {
-                    _team.keyGroup = _team.keyGroup + 1;
+                    _team.KeyGroup = _team.KeyGroup + 1;
                     _team.allKeyGroups.Clear();
-                    for (int i = 1; i <= _team.keyGroup; i++)
+                    for (int i = 1; i <= _team.KeyGroup; i++)
                     {                        
                         _team.allKeyGroups.Add(i);
                     }
@@ -111,8 +111,8 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Details/5
         public ActionResult Details(int id)
         {
-            _mnger = new Manager();
-            Team team = _mnger.GetByID(id);
+            _mnger = new ManagerTeamRepository();
+            TeamModel team = _mnger.GetByID(id);
             return View(team);
         }
         
@@ -121,9 +121,9 @@ namespace mVoxApp.Web.Controllers
         {
             try
             {
-                _mnger = new Manager();
-                Team _team = _mnger.GetByID(id);
-                _team.keyGroup = 1;
+                _mnger = new ManagerTeamRepository();
+                TeamModel _team = _mnger.GetByID(id);
+                _team.KeyGroup = 1;
 
                 _mnger.Update(_team);
                 return RedirectToAction("Tables");
@@ -137,11 +137,11 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Create
         public ActionResult Create()
         {
-            _mnger = new Manager();            
-            List<Team> listReturn = _mnger.GetAll();
+            _mnger = new ManagerTeamRepository();            
+            List<TeamModel> listReturn = _mnger.GetAll();
             ViewData["TeamList"] = listReturn;
 
-            _mngerKey = new ManagerKeygroup();
+            _mngerKey = new ManagerKeygroupRepository();
 
 
             return View("Register");
@@ -149,11 +149,11 @@ namespace mVoxApp.Web.Controllers
 
         // POST: Championship/Create
         [HttpPost]
-        public ActionResult Create(Team _team)
+        public ActionResult Create(TeamModel _team)
         {
             try
             {
-                _mnger = new Manager();
+                _mnger = new ManagerTeamRepository();
                 _mnger.Create(_team);
                 
                 //ViewBag.Msg = "Criado Com Sucesso";
@@ -170,18 +170,18 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Edit/5
         public ActionResult Edit(int id)
         {
-            _mnger = new Manager();
-            Team retorno = _mnger.GetByID(id);
+            _mnger = new ManagerTeamRepository();
+            TeamModel retorno = _mnger.GetByID(id);
             return View("Edit", retorno);
         }
 
         // POST: Championship/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Team _team)
+        public ActionResult Edit(int id, TeamModel _team)
         {
             try
             {
-                _mnger = new Manager();
+                _mnger = new ManagerTeamRepository();
                 _mnger.Update(_team);
                 return RedirectToAction("Index");
             }
@@ -194,18 +194,18 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Delete/5
         public ActionResult Delete(int id)
         {
-            _mnger = new Manager();
-            Team retorno = _mnger.GetByID(id);
+            _mnger = new ManagerTeamRepository();
+            TeamModel retorno = _mnger.GetByID(id);
             return View("Delete", retorno);            
         }
 
         // POST: Championship/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, Team _team)
+        public ActionResult Delete(int id, TeamModel _team)
         {
             try
             {
-                _mnger = new Manager();
+                _mnger = new ManagerTeamRepository();
                 _mnger.Delete(id);
                 return RedirectToAction("Create");
             }

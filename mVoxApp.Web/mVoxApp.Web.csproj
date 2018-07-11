@@ -145,20 +145,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\Repository\StaticListRepository.cs" />
     <Compile Include="App_Data\Repository\Repository.cs" />
     <Compile Include="App_Data\Repository\ConnectionDB.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BLL\ConverterTeam .cs" />
-    <Compile Include="Controllers\BLL\ConverterKeygroup.cs" />
     <Compile Include="Controllers\BLL\Manager.cs" />
     <Compile Include="Controllers\ChampionshipController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\KeyGroup.cs" />
-    <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\ChampionshipModel.cs" />
+    <Compile Include="Models\KeyGroupModel.cs" />
+    <Compile Include="Models\MatchModel.cs" />
+    <Compile Include="Models\TeamModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

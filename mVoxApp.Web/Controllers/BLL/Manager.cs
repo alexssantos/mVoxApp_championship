@@ -7,49 +7,49 @@ using System.Web;
 
 namespace mVoxApp.Web.Controllers.BLL
 {
-    public class Manager
+
+    public class ManagerTeamRepository
     {
-        Repository _rep;
+        Repository _rep;        
 
-        public List<Team> GetAll()
+        public List<TeamModel> GetAll()
         {
             _rep = new Repository();
-            List<Team> ListaTodos = _rep.GetTeams();
-            List<Team> _returo = ListaTodos.OrderBy(x => x.name).ToList();
-
-            return _returo;
-        }
-
-        public Team GetByID(int id)
-        {
-            _rep = new Repository();
-            Team _retorno = _rep.GetByID(id);
+            List<TeamModel> _retorno = _rep.GetTeams();
+            _retorno = _retorno.OrderBy(x => x.Name).ToList();
 
             return _retorno;
         }
 
-        public List<Team> GetByName(string teamName)
+        public TeamModel GetByID(int id)
         {
             _rep = new Repository();
-            List<Team> _retorno = _rep.GetBySTRING(teamName);
+            TeamModel _retorno = _rep.GetTeamByID(id);
 
             return _retorno;
         }
-                
 
-        public bool Create(Team team)
+        public List<TeamModel> GetByName(string teamName)
         {
             _rep = new Repository();
-            bool retornoCreate = _rep.Create_DB(team);
+            List<TeamModel> _retorno = _rep.GetTeamBySTRING(teamName);
+
+            return _retorno;
+        }                
+
+        public bool Create(TeamModel team)
+        {
+            _rep = new Repository();
+            bool retornoCreate = _rep.CreateTeam_DB(team);
 
             return retornoCreate;
         }
 
-        public bool Update(Team _team)
+        public bool Update(TeamModel _team)
         {
             _rep = new Repository();
-            bool retornoDel = _rep.Delete_DB(_team.id);
-            bool retornoAdd = _rep.Create_DB(_team);
+            bool retornoDel = _rep.DeleteTeam_DB(_team.Id);
+            bool retornoAdd = _rep.CreateTeam_DB(_team);
 
             if (retornoAdd == retornoDel == true)
             {
@@ -64,20 +64,20 @@ namespace mVoxApp.Web.Controllers.BLL
         public bool Delete(int id)
         {
             _rep = new Repository();
-            bool retorno = _rep.Delete_DB(id);
+            bool retorno = _rep.DeleteTeam_DB(id);
             return retorno;
         }
     }
 
-    public class ManagerKeygroup
+    public class ManagerKeygroupRepository
     {
         Repository _rep;
 
-        public List<KeyGroup> GetAll()
+        public List<KeyGroupModel> GetAll()
         {
             _rep = new Repository();
-            List<KeyGroup> ListaTodos = _rep.GetKeyGroups();
-            List<KeyGroup> _returo = ListaTodos.OrderBy(x => x.name).ToList();
+            List<KeyGroupModel> ListaTodos = _rep.GetKeyGroups();
+            List<KeyGroupModel> _returo = ListaTodos.OrderBy(x => x.Name).ToList();
 
             return _returo;
         }
@@ -85,8 +85,8 @@ namespace mVoxApp.Web.Controllers.BLL
         public bool KeyGroupFull(int id)
         {
             _rep = new Repository();
-            KeyGroup _kGroup = _rep.GetKeyGroupByID(id);
-            if (_kGroup.maxTeams > _kGroup.totalTeams)
+            KeyGroupModel _kGroup = _rep.GetKeyGroupByID(id);
+            if (_kGroup.MaxTeams > _kGroup.TotalTeams)
             {
                 return false;
             }
@@ -103,7 +103,19 @@ namespace mVoxApp.Web.Controllers.BLL
             return count;
 
         }
-
-
     }
+
+    public class ManagerStaticRepository
+    {
+        StaticListRepository _staticRep;
+
+
+        //----------STATIC CRUD TEAM ----------//
+        public List<TeamModel> GetAllTeam()
+        {
+
+        }
+    }
+
+
 }
