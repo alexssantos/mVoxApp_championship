@@ -84,20 +84,20 @@ namespace mVoxApp.Web.Controllers
                 TeamModel _team = _mnger.GetByID(id);
                 int nextKeyGroup = _team.KeyGroup + 1;
 
-                if (!_mngerKey.KeyGroupFull(nextKeyGroup))
-                {
-                    _team.KeyGroup = _team.KeyGroup + 1;
-                    _team.allKeyGroups.Clear();
-                    for (int i = 1; i <= _team.KeyGroup; i++)
-                    {                        
-                        _team.allKeyGroups.Add(i);
-                    }
-                    _mnger.Update(_team);
-                }
-                else
-                {
-                    ViewBag.KeyGroupFull = "Key Group CHEIA!";
-                }                
+                //if (!_mngerKey.KeyGroupFull(nextKeyGroup))
+                //{
+                //    _team.KeyGroup = _team.KeyGroup + 1;
+                //    //_team.allKeyGroups.Clear();
+                //    //for (int i = 1; i <= _team.KeyGroup; i++)
+                //    //{                        
+                //    //    _team.allKeyGroups.Add(i);
+                //    //}
+                //    _mnger.Update(_team);
+                //}
+                //else
+                //{
+                //    ViewBag.KeyGroupFull = "Key Group CHEIA!";
+                //}                
 
                 
                 return RedirectToAction("Tables");

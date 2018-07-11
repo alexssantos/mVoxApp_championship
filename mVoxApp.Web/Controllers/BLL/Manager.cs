@@ -85,19 +85,19 @@ namespace mVoxApp.Web.Controllers.BLL
             return _returo;
         }
 
-        public bool KeyGroupFull(int id)
-        {
-            _rep = new Repository();
-            KeyGroupModel _kGroup = _rep.GetKeyGroupByID(id);
-            if (_kGroup.MaxTeams > _kGroup.TotalTeams)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        //public bool KeyGroupFull(int id)
+        //{
+        //    _rep = new Repository();
+        //    KeyGroupModel _kGroup = _rep.GetKeyGroupByID(id);
+        //    if (_kGroup.MaxTeams > _kGroup.TotalTeams)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
 
         public int KeyGroupTeamCounter()
         {
