@@ -12,7 +12,7 @@ namespace mVoxApp.Web.App_Data.Repository
     {
         static List<TeamModel>      StaticListTeams;
         static List<KeyGroupModel>  StaticListGroups;
-        static List<MatchModel>     StaticListMatch;
+        //static List<MatchModel>     StaticListMatch;
 
         public StaticListRepository()
         {
@@ -26,12 +26,13 @@ namespace mVoxApp.Web.App_Data.Repository
                 StaticListGroups = new List<KeyGroupModel>();
                 PreLoadKeyGroups();
             }
-            if (StaticListMatch == null)
-            {
-                StaticListMatch = new List<MatchModel>();
-            }
+            //if (StaticListMatch == null)
+            //{
+            //    StaticListMatch = new List<MatchModel>();
+            //}
         }
 
+        //PreLOAD
         private void PreLoadTeams()
         {
             //Oitava, pelo menos, 16 times
@@ -40,7 +41,7 @@ namespace mVoxApp.Web.App_Data.Repository
                 StaticListTeams.Add(
                     new TeamModel { Id=i,
                                     Name= $"Time {i}",
-                                    KeyGroup= 0,
+                                    KeyGroup = 0,
                                     Winner= false
                     }
                 );
@@ -61,17 +62,21 @@ namespace mVoxApp.Web.App_Data.Repository
             namesKeyGroups.Add("Oitavas de Finais"); 
             namesKeyGroups.Add("Quartas de Finais"); 
             namesKeyGroups.Add("Quartas de Finais"); 
-            namesKeyGroups.Add("Final"); 
+            namesKeyGroups.Add("Final");
 
             for (int i = 0; i < 5; i++)
             {
                 StaticListGroups.Add(new KeyGroupModel { Id=i,
                                                          Name = namesKeyGroups[i],
-                                                         MaxMatchs = ( 1/( 2^(i) ) ) * 32,
-                                                         TotalMatchs = 0 });
+                                                         MaxTeams = ( 1/((int)Math.Pow(2, i)) ) * 32,
+                                                         TotalTeams = 0 });
             }
 
-            StaticListGroups[0].MaxMatchs = 1000;
+            StaticListGroups[0].MaxTeams = 1000;
+            StaticListGroups[1].MaxTeams = 16;
+            StaticListGroups[2].MaxTeams = 8;
+            StaticListGroups[3].MaxTeams = 4;
+            StaticListGroups[4].MaxTeams = 2;
         }
 
         //CRUD Team
@@ -110,5 +115,17 @@ namespace mVoxApp.Web.App_Data.Repository
         }
 
 
+        //KeyGroups
+        public List<KeyGroupModel> GetKeyGroups()
+        {
+            return StaticListGroups;
+        }
+
+        public KeyGroupModel GetKeyGroupByID(int id)
+        {
+            var retorno = StaticListGroups.Where(x => x.Id == id).First();
+            return retorno;
+
+        }
     }
 }

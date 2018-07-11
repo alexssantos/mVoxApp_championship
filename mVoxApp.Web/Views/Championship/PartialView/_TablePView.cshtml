@@ -1,4 +1,4 @@
-﻿@model IEnumerable<mVoxApp.Web.Models.Team>
+﻿@model IEnumerable<mVoxApp.Web.Models.TeamModel>
 <hr />
 <br /><br />
 
@@ -7,43 +7,27 @@
     {
         <table class="table">
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.points)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.keyGroup)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.flag)
-                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>              
+                              
                 <th></th>
             </tr>
 
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Name)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.points)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.keyGroup)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.flag)
-                    </td>
+                   
                     <td class="text-right">
-                        @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @Class = "btn btn-default" }) |
-                        @Html.ActionLink("Detalhes", "Details", new { id = item.id }, new { @Class = "btn btn-default" }) |
-                        @Html.ActionLink(" Venceu Jogo ", "WonGame", new { id = item.id }, new { @Class = "btn btn-success" }) |
-                        @if (item.keyGroup > 1)
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @Class = "btn btn-default" }) |
+                        @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @Class = "btn btn-default" }) |
+                        @Html.ActionLink(" Venceu Jogo ", "WonGame", new { id = item.Id }, new { @Class = "btn btn-success" }) |
+                        @if (item.KeyGroup >= 1)
                         {
-                             @Html.ActionLink("Excluir da Tabela", "DeleteFromKeyGroup", new { id = item.id }, new { @Class = "btn btn-default btn-danger" })
+                             @Html.ActionLink("Desclassificado", "DeleteFromKeyGroup", new { id = item.Id }, new { @Class = "btn btn-default btn-danger" })
                         }
                     </td>
                 </tr>

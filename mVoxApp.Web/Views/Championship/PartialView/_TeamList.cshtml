@@ -1,4 +1,4 @@
-﻿@model IEnumerable<mVoxApp.Web.Models.Team>
+﻿@model IEnumerable<mVoxApp.Web.Models.TeamModel>
 
 <br />
 <h2 class="text-center">Todos os Times</h2>
@@ -7,13 +7,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.points)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.keyGroup)
+            @Html.DisplayNameFor(model => model.KeyGroup)
         </th>
         <th></th>
     </tr>
@@ -22,18 +19,15 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.name)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.points)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.keyGroup)
+                @Html.DisplayFor(modelItem => item.KeyGroup)
             </td>
             <td class="text-right"  >
-                @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @Class="btn btn-default" }) |
-                @Html.ActionLink("Detalhes", "Details", new { id = item.id }, new { @Class = "btn btn-default" }) |
-                @Html.ActionLink("Excluir", "Delete", new { id = item.id }, new { @Class = "btn btn-default btn-danger" })
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @Class="btn btn-default" }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @Class = "btn btn-default" }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @Class = "btn btn-default btn-danger" })
             </td>
         </tr>
     }

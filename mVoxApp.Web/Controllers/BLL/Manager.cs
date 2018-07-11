@@ -11,7 +11,7 @@ namespace mVoxApp.Web.Controllers.BLL
     #region DB Team
     public class ManagerTeamRepository
     {
-        DB_Repository _rep;        
+        DB_Repository _rep;
 
         public List<TeamModel> GetAll()
         {
@@ -36,7 +36,7 @@ namespace mVoxApp.Web.Controllers.BLL
             List<TeamModel> _retorno = _rep.GetTeamBySTRING(teamName);
 
             return _retorno;
-        }                
+        }
 
         public bool Create(TeamModel team)
         {
@@ -57,7 +57,7 @@ namespace mVoxApp.Web.Controllers.BLL
                 return retornoAdd;
             }
             else
-            {                
+            {
                 return false;
             }
         }
@@ -109,16 +109,13 @@ namespace mVoxApp.Web.Controllers.BLL
     }
     #endregion
 
-    public class ManagerStaticRepository
+    public class ManagerTeamStaticRepository
     {
-        StaticListRepository _rep;
-        List<TeamModel> retorno;
-
+        StaticListRepository _rep = new StaticListRepository();
 
         //----------STATIC CRUD TEAM ----------//
         public List<TeamModel> GetAll()
         {
-            _rep = new StaticListRepository();
             List<TeamModel> _retorno = _rep.GetAllTeam();
             _retorno = _retorno.OrderBy(x => x.Name).ToList();
 
@@ -127,7 +124,6 @@ namespace mVoxApp.Web.Controllers.BLL
 
         public TeamModel GetByID(int id)
         {
-            _rep = new StaticListRepository();
             TeamModel _retorno = _rep.GetTeamByID(id);
 
             return _retorno;
@@ -135,7 +131,6 @@ namespace mVoxApp.Web.Controllers.BLL
 
         public List<TeamModel> GetByName(string teamName)
         {
-            _rep = new StaticListRepository();
             List<TeamModel> _retorno = _rep.GetTeamByNAME(teamName);
 
             return _retorno;
@@ -143,22 +138,46 @@ namespace mVoxApp.Web.Controllers.BLL
 
         public void Create(TeamModel team)
         {
-            _rep = new StaticListRepository();
             _rep.CreateTeam(team);
         }
 
         public void Update(TeamModel _team)
         {
-            _rep = new StaticListRepository();
-            _rep.UpdateTeam(_team);            
+            _rep.UpdateTeam(_team);
         }
 
         public void Delete(int id)
         {
-            _rep = new StaticListRepository();
-            _rep.DeleteTeam(id);            
+            _rep.DeleteTeam(id);
         }
     }
 
+    public class ManagerKeyGroupStaticRepository
+    {
+        StaticListRepository _rep;
+
+        public List<KeyGroupModel> GetAll()
+        {
+            _rep = new StaticListRepository();
+            List<KeyGroupModel> ListaTodos = _rep.GetKeyGroups();
+            List<KeyGroupModel> _returo = ListaTodos.OrderBy(x => x.Name).ToList();
+
+            return _returo;
+        }
+
+        public bool KeyGroupFull(int id)
+        {
+            _rep = new StaticListRepository();
+            KeyGroupModel _kGroup = _rep.GetKeyGroupByID(id);
+            if (_kGroup.MaxTeams > _kGroup.TotalTeams)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
 
 }

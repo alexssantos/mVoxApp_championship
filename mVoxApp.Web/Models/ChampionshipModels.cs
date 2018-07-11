@@ -11,12 +11,13 @@ namespace mVoxApp.Web.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Nome")]
+        [Display(Name = "Nome do Time")]
         [MaxLength(50)]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Informe o número do Grupo")]
-        [Display(Name = "Chave do Grupo")]
+        [Display(Name = "Classificação")]
+        [Range(0, 5)]
         public int KeyGroup { get; set; }
 
         public bool Winner { get; set; }
@@ -26,8 +27,14 @@ namespace mVoxApp.Web.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int MaxMatchs { get; set; }
-        public int TotalMatchs { get; set; }
+
+        [Display(Name = "Capacidade")]
+        public int MaxTeams { get; set; }
+
+        [Display(Name = "Classificados")]
+        public int TotalTeams { get; set; }
+        //public int MaxMatchs { get; set; }
+        //public int TotalMatchs { get; set; }
         //List<MatchModel> ListMatchs { get; set; }
     }
 

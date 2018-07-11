@@ -1,16 +1,16 @@
-﻿@model IEnumerable<mVoxApp.Web.Models.KeyGroup>
+﻿@model IEnumerable<mVoxApp.Web.Models.KeyGroupModel>
 <hr /><br /><br /><br />
 
 <table class="table text-center ">
     <tr>
         <th class="text-center">
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th class="text-center">
-            @Html.DisplayNameFor(model => model.maxTeams)
+            @Html.DisplayNameFor(model => model.MaxTeams)
         </th>
         <th class="text-center">
-            @Html.DisplayNameFor(model => model.totalTeams)
+            @Html.DisplayNameFor(model => model.TotalTeams)
         </th>
         @*<th></th>*@
     </tr>
@@ -19,13 +19,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.name)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.maxTeams)
+                @Html.DisplayFor(modelItem => item.MaxTeams)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.totalTeams)
+                @Html.DisplayFor(modelItem => item.TotalTeams)
             </td>
             @*<td class="text-right">
                     @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @Class = "btn btn-default" }) |
