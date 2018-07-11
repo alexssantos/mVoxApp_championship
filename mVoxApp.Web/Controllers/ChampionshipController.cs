@@ -134,10 +134,7 @@ namespace mVoxApp.Web.Controllers
             _mngerTeam = new ManagerTeamStaticRepository();            
             List<TeamModel> listReturn = _mngerTeam.GetAll().OrderBy(x => x.Id).ToList();
             ViewData["TeamList"] = listReturn;
-
-            _mngerKey = new ManagerKeyGroupStaticRepository();
-
-
+            
             return View("Register");
         }
 
@@ -206,6 +203,30 @@ namespace mVoxApp.Web.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        // GET: Championship/Search
+        public ActionResult Search()
+        {           
+            return View("Search");
+        }
+
+        // POST: Championship/Search
+        [HttpPost]
+        public ActionResult Search(TeamModel busca)
+        {
+            try
+            {
+                _mngerTeam = new ManagerTeamStaticRepository();
+                List<TeamModel> ListaBuscada = _mngerTeam.GetByName(busca.Name);
+                ViewData["SearchPView"] = ListaBuscada;
+
+                return View("Search");
+            }
+            catch
+            {
+                return View("Error");
             }
         }
 
