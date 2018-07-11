@@ -32,7 +32,6 @@ namespace mVoxApp.Web.App_Data.Repository
             }
         }
 
-
         private void PreLoadTeams()
         {
             //Oitava, pelo menos, 16 times
@@ -47,7 +46,6 @@ namespace mVoxApp.Web.App_Data.Repository
                 );
             }
         }
-
         /// <KEYGroups>        
         /// 0. Nenhum
         /// 1. Oitavas
@@ -75,5 +73,42 @@ namespace mVoxApp.Web.App_Data.Repository
 
             StaticListGroups[0].MaxMatchs = 1000;
         }
+
+        //CRUD Team
+        public List<TeamModel> GetAllTeam()
+        {
+            return StaticListTeams;
+        }
+
+        public TeamModel GetTeamByID(int myId)
+        {
+            return StaticListTeams.Where(x => x.Id == myId).First();
+        }
+
+        public List<TeamModel> GetTeamByNAME(string myName)
+        {
+            return StaticListTeams.FindAll(x => x.Name.Contains(myName));
+        }
+
+        public void CreateTeam(TeamModel newTeam)
+        {
+            newTeam.Id = StaticListTeams.Last().Id + 1;
+            StaticListTeams.Add(newTeam);
+        }
+
+        public void DeleteTeam(int myId)
+        {
+            var ToDelete = GetTeamByID(myId);
+            StaticListTeams.Remove(ToDelete);
+        }
+
+        public void UpdateTeam(TeamModel newTeam)
+        {
+            var oldTeam = GetTeamByID(newTeam.Id);
+            var index = StaticListTeams.IndexOf(oldTeam);
+            StaticListTeams[index].Name = newTeam.Name;
+        }
+
+
     }
 }

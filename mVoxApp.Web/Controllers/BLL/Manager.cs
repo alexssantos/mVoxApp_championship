@@ -111,14 +111,52 @@ namespace mVoxApp.Web.Controllers.BLL
 
     public class ManagerStaticRepository
     {
-        StaticListRepository _staticRep;
+        StaticListRepository _rep;
         List<TeamModel> retorno;
 
 
         //----------STATIC CRUD TEAM ----------//
-        public List<TeamModel> GetAllTeam()
+        public List<TeamModel> GetAll()
         {
-            return retorno;
+            _rep = new StaticListRepository();
+            List<TeamModel> _retorno = _rep.GetAllTeam();
+            _retorno = _retorno.OrderBy(x => x.Name).ToList();
+
+            return _retorno;
+        }
+
+        public TeamModel GetByID(int id)
+        {
+            _rep = new StaticListRepository();
+            TeamModel _retorno = _rep.GetTeamByID(id);
+
+            return _retorno;
+        }
+
+        public List<TeamModel> GetByName(string teamName)
+        {
+            _rep = new StaticListRepository();
+            List<TeamModel> _retorno = _rep.GetTeamByNAME(teamName);
+
+            return _retorno;
+        }
+
+        public void Create(TeamModel team)
+        {
+            _rep = new StaticListRepository();
+            _rep.CreateTeam(team);
+        }
+
+        public void Update(TeamModel _team)
+        {
+            _rep = new StaticListRepository();
+            _rep.UpdateTeam(_team);            
+        }
+
+        public void Delete(int id)
+        {
+            _rep = new StaticListRepository();
+            _rep.DeleteTeam(id);            
         }
     }
 
