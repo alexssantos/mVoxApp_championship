@@ -157,9 +157,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChampionshipModel.cs" />
-    <Compile Include="Models\KeyGroupModel.cs" />
-    <Compile Include="Models\MatchModel.cs" />
-    <Compile Include="Models\TeamModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
