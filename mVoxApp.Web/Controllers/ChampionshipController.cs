@@ -43,23 +43,26 @@ namespace mVoxApp.Web.Controllers
             List<KeyGroupModel> _listKeygroups = _mngerKey.GetAll().OrderBy(x=>x.Id).ToList();
 
             //--------- VIEWDATA ----------------
-            ViewData["keygroupAll"] = _listKeygroups;
-            ViewData["table1"] = _listTeams;
-            ViewData["table2"] = _listTeams;
-            ViewBag.TableTitle = "ViewBab.TableTitle";
 
-            //----------ViewData DINAMIC // [TeamKeyGroup1] (List<Team>)  <-> 
+            
+            ViewData["teams-all"] = _listTeams;
+            ViewData["keygroupAll"] = _listKeygroups;            
+
             for (int i = 1; i <= _listKeygroups.Count(); i++)
             {
+                // "TeamKeyGroup1" //  [ List<Team> ] //  [ViewData] DINAMIC 
                 ViewData[$"TeamsByKeyGroup{i}"] = _listTeams.FindAll(x => x.KeyGroup == (i-1)).ToList();
             }
-            //----------ViewData DINAMIC // [KeyGroup1] (List<KeyGrupo>)  <-> pegar cada OBJETO da lista
+
+            // [ViewData] DINAMIC // "KeyGroup1"  //  [ List<KeyGrupo> ]   ** pegar cada OBJETO da lista
             for (int i = 1; i < _listKeygroups.Count; i++)
             {
-                ViewData[$"KeyGroup{i}"] = _listKeygroups.OrderBy(x=>x.Id);
-
+                int qtdd = _mngerTeam.CountByKeyGroup(i-1);
+                _listKeygroups[i - 1].TotalTeams = qtdd;
+                ViewData[$"KeyGroup{i}"] = _listKeygroups;
             }
-            //----------ViewData DINAMIC // [KeyGroupName1] (Strings)     <-> pegar parametro NAME de cada OBJETO dentro da lista
+
+            // "KeyGroupName1"  //   [ Strings ]    //   [ViewData DINAMIC]   ** pegar parametro NAME de cada OBJETO dentro da lista
             int count = 1; 
             foreach (var item in _listKeygroups)
             {                
@@ -129,7 +132,7 @@ namespace mVoxApp.Web.Controllers
         public ActionResult Create()
         {
             _mngerTeam = new ManagerTeamStaticRepository();            
-            List<TeamModel> listReturn = _mngerTeam.GetAll();
+            List<TeamModel> listReturn = _mngerTeam.GetAll().OrderBy(x => x.Id).ToList();
             ViewData["TeamList"] = listReturn;
 
             _mngerKey = new ManagerKeyGroupStaticRepository();
@@ -210,5 +213,6 @@ namespace mVoxApp.Web.Controllers
         {
             return View("NotCreated");
         }
+
     }
 }

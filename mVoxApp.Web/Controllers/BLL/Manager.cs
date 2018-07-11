@@ -150,6 +150,13 @@ namespace mVoxApp.Web.Controllers.BLL
         {
             _rep.DeleteTeam(id);
         }
+
+        public int CountByKeyGroup(int idKeyGroup)
+        {
+            List<TeamModel> all = GetAll();
+            int count = all.Where(x => x.KeyGroup == idKeyGroup).Count();
+            return count;
+        }
     }
 
     public class ManagerKeyGroupStaticRepository

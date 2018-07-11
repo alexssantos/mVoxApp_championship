@@ -111,7 +111,7 @@ namespace mVoxApp.Web.App_Data.Repository
         {
             var oldTeam = GetTeamByID(newTeam.Id);
             var index = StaticListTeams.IndexOf(oldTeam);
-            StaticListTeams[index].Name = newTeam.Name;
+            StaticListTeams[index] = newTeam;
         }
 
 
