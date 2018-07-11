@@ -8,6 +8,7 @@ using System.Web;
 namespace mVoxApp.Web.Controllers.BLL
 {
 
+    #region DB Team
     public class ManagerTeamRepository
     {
         Repository _rep;        
@@ -68,7 +69,9 @@ namespace mVoxApp.Web.Controllers.BLL
             return retorno;
         }
     }
+    #endregion
 
+    #region DB KeyGroup
     public class ManagerKeygroupRepository
     {
         Repository _rep;
@@ -104,6 +107,7 @@ namespace mVoxApp.Web.Controllers.BLL
 
         }
     }
+    #endregion
 
     public class ManagerStaticRepository
     {
