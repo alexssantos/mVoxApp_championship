@@ -48,32 +48,27 @@ namespace mVoxApp.Web.Controllers
             ViewData["teams-all"] =     _listTeams;
             ViewData["keygroups-all"] = _listKeygroups;
 
-            //TABELA PRINCIPAL INICIAL - DETALHES DOS GRUPOS
-            // "TeamByKeyGroup1" //    [ List<Team> ]   //  [ViewData] DINAMIC 
-            for (int i = 1; i <= _listKeygroups.Count(); i++)
-            {
-                ViewData[$"TeamsByKeyGroup{i}"] = _listTeams.FindAll(x => x.KeyGroup == (i-1)).ToList();
-            }
-
-            //NOMES DAS TABELAS
-            // "KeyGroupName1"  //   [ Strings ]    //   [ViewData] DINAMIC   ** pegar parametro NAME de cada OBJETO dentro da lista
-            int count = 1;
-            foreach (var item in _listKeygroups)
-            {
-                ViewData[$"KeyGroupName{count}"] = item.Name;
-                count++;
-            }
             
-            //OBJ_TIMES DENTRO DAS TABLEAS
-            // "KeyGroup1"  //   [ List<KeyGrupo> ]  // [ViewData] DINAMIC    ** pegar cada OBJETO da lista
             for (int i = 1; i <= _listKeygroups.Count; i++)
             {
-                int qtdd = _mngerTeam.CountByKeyGroup(i-1);
-                _listKeygroups[i - 1].TotalTeams = qtdd;               
+                //TABELA PRINCIPAL INICIAL - DETALHES DOS GRUPOS
+                // "TeamByKeyGroup1" //    [ List<Team> ]   //  [ViewData] DINAMIC 
+                ViewData[$"TeamsByKeyGroup{i}"] = _listTeams.FindAll(x => x.KeyGroup == (i-1)).ToList();
+
+                //OBJ_TIMES DENTRO DAS TABLEAS                
+                int qtdd = _mngerTeam.CountByKeyGroup(i - 1);
+                _listKeygroups[i - 1].TotalTeams = qtdd;
+
+                //NOMES DAS TABELAS
+                // "KeyGroupName1"  //   [ Strings ]    //   [ViewData] DINAMIC   ** pegar parametro NAME de cada OBJETO dentro da lista
+                ViewData[$"KeyGroupName{i}"] = _listKeygroups[i-1].Name;
+
             }
+
+            // "KeyGroup1"  //   [ List<KeyGrupo> ]  // [ViewData] DINAMIC    ** pegar cada OBJETO da lista
             ViewData[$"KeyGroups"] = _listKeygroups;
 
-            
+                        
 
             return View("Tables", _listTeams);
         }
