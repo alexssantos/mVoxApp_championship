@@ -172,12 +172,7 @@ namespace mVoxApp.Web.Controllers
         {
             try
             {
-                _mngerTeam = new ManagerTeamStaticRepository();
-
-                if (_team.KeyGroup > 0 & _team.KeyGroup  < 6 )
-                {
-                    _team.KeyGroup = _team.KeyGroup - 1;
-                }
+                _mngerTeam = new ManagerTeamStaticRepository();               
                 _mngerTeam.Update(_team);
                 return RedirectToAction("Index");
             }
