@@ -3,21 +3,30 @@
 @{
     ViewBag.Title = "Tables";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    if ( @ViewBag.alert2 != null )
+    {        
+        <script>
+            var texto = "@ViewBag.alert";
+            alert(texto);
+        </script>
+    }
 }
+
+<br /><br />
 
 <h2 class="text-center danger">@ViewBag.KeyGroupFull</h2>
 
 <hr /><br /><br /><br />
 <div>
     <h2 class="text-center">Tabela das Etapas</h2>
-    @Html.Partial("PartialView/_TablePView_keygroup", ViewData["keygroup1"])
+    @Html.Partial("PartialView/_TablePView_keygroup", ViewData["keygroups"])
 </div>
 
 <hr />
 <div>
     @{
         int count = 1;
-        foreach (var item in ViewData["keygroupAll"] as IEnumerable<mVoxApp.Web.Models.KeyGroupModel>)
+        foreach (var item in ViewData["keygroups-all"] as IEnumerable<mVoxApp.Web.Models.KeyGroupModel>)
         {
             count++;
         }
@@ -33,7 +42,7 @@
                     <hr /><br />
                     <hw>
                         <h2 class="text-center">
-                            Group @(i): @ViewData[$"keygroupname{i}"] 
+                            Group @(i): @ViewData[$"keygroupname{i}"]
                         </h2>
                     </hw>
 

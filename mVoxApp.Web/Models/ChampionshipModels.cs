@@ -26,6 +26,8 @@ namespace mVoxApp.Web.Models
     public class KeyGroupModel
     {
         public int Id { get; set; }
+
+        [Display(Name = "Etapas")]
         public string Name { get; set; }
 
         [Display(Name = "Capacidade")]

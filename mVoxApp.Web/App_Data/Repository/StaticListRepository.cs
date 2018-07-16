@@ -58,11 +58,11 @@ namespace mVoxApp.Web.App_Data.Repository
         private void PreLoadKeyGroups()
         {
             List<string> namesKeyGroups = new List<string>();
-            namesKeyGroups.Add("Não Qualificado"); 
-            namesKeyGroups.Add("Oitavas de Finais"); 
-            namesKeyGroups.Add("Quartas de Finais"); 
-            namesKeyGroups.Add("Quartas de Finais"); 
-            namesKeyGroups.Add("Final");
+            namesKeyGroups.Add("Não Qualificado (oo)"); 
+            namesKeyGroups.Add("Oitavas de Finais (16)"); 
+            namesKeyGroups.Add("Quartas de Finais (8)"); 
+            namesKeyGroups.Add("Semi Finais (4)"); 
+            namesKeyGroups.Add("Final (2)");
 
             for (int i = 0; i < 5; i++)
             {

@@ -46,23 +46,23 @@ namespace mVoxApp.Web.Controllers
 
             
             ViewData["teams-all"] = _listTeams;
-            ViewData["keygroupAll"] = _listKeygroups;            
+            ViewData["keygroups-all"] = _listKeygroups;
 
+            // "TeamKeyGroup1" //    [ List<Team> ]   //  [ViewData] DINAMIC 
             for (int i = 1; i <= _listKeygroups.Count(); i++)
             {
-                // "TeamKeyGroup1" //  [ List<Team> ] //  [ViewData] DINAMIC 
                 ViewData[$"TeamsByKeyGroup{i}"] = _listTeams.FindAll(x => x.KeyGroup == (i-1)).ToList();
             }
 
-            // [ViewData] DINAMIC // "KeyGroup1"  //  [ List<KeyGrupo> ]   ** pegar cada OBJETO da lista
+            // "KeyGroup1"  //   [ List<KeyGrupo> ]  // [ViewData] DINAMIC    ** pegar cada OBJETO da lista
             for (int i = 1; i < _listKeygroups.Count; i++)
             {
                 int qtdd = _mngerTeam.CountByKeyGroup(i-1);
-                _listKeygroups[i - 1].TotalTeams = qtdd;
-                ViewData[$"KeyGroup{i}"] = _listKeygroups;
+                _listKeygroups[i - 1].TotalTeams = qtdd;               
             }
+            ViewData[$"KeyGroups"] = _listKeygroups;
 
-            // "KeyGroupName1"  //   [ Strings ]    //   [ViewData DINAMIC]   ** pegar parametro NAME de cada OBJETO dentro da lista
+            // "KeyGroupName1"  //   [ Strings ]    //   [ViewData] DINAMIC   ** pegar parametro NAME de cada OBJETO dentro da lista
             int count = 1; 
             foreach (var item in _listKeygroups)
             {                
@@ -90,9 +90,9 @@ namespace mVoxApp.Web.Controllers
                 }
                 else
                 {
-                    ViewBag.KeyGroupFull = "Key Group CHEIA!";
+                    ViewBag.alert = "Alert";
                 }
-
+                ViewBag.alert2 = "Alert2";
 
                 return RedirectToAction("Tables");
             }
