@@ -45,30 +45,35 @@ namespace mVoxApp.Web.Controllers
             //--------- VIEWDATA ----------------
 
             
-            ViewData["teams-all"] = _listTeams;
+            ViewData["teams-all"] =     _listTeams;
             ViewData["keygroups-all"] = _listKeygroups;
 
-            // "TeamKeyGroup1" //    [ List<Team> ]   //  [ViewData] DINAMIC 
+            //TABELA PRINCIPAL INICIAL - DETALHES DOS GRUPOS
+            // "TeamByKeyGroup1" //    [ List<Team> ]   //  [ViewData] DINAMIC 
             for (int i = 1; i <= _listKeygroups.Count(); i++)
             {
                 ViewData[$"TeamsByKeyGroup{i}"] = _listTeams.FindAll(x => x.KeyGroup == (i-1)).ToList();
             }
 
+            //NOMES DAS TABELAS
+            // "KeyGroupName1"  //   [ Strings ]    //   [ViewData] DINAMIC   ** pegar parametro NAME de cada OBJETO dentro da lista
+            int count = 1;
+            foreach (var item in _listKeygroups)
+            {
+                ViewData[$"KeyGroupName{count}"] = item.Name;
+                count++;
+            }
+            
+            //OBJ_TIMES DENTRO DAS TABLEAS
             // "KeyGroup1"  //   [ List<KeyGrupo> ]  // [ViewData] DINAMIC    ** pegar cada OBJETO da lista
-            for (int i = 1; i < _listKeygroups.Count; i++)
+            for (int i = 1; i <= _listKeygroups.Count; i++)
             {
                 int qtdd = _mngerTeam.CountByKeyGroup(i-1);
                 _listKeygroups[i - 1].TotalTeams = qtdd;               
             }
             ViewData[$"KeyGroups"] = _listKeygroups;
 
-            // "KeyGroupName1"  //   [ Strings ]    //   [ViewData] DINAMIC   ** pegar parametro NAME de cada OBJETO dentro da lista
-            int count = 1; 
-            foreach (var item in _listKeygroups)
-            {                
-                ViewData[$"KeyGroupName{count}"] = item.Name;
-                count++;
-            }
+            
 
             return View("Tables", _listTeams);
         }
@@ -173,6 +178,11 @@ namespace mVoxApp.Web.Controllers
             try
             {
                 _mngerTeam = new ManagerTeamStaticRepository();
+
+                if (_team.KeyGroup > 0 & _team.KeyGroup  < 6 )
+                {
+                    _team.KeyGroup = _team.KeyGroup - 1;
+                }
                 _mngerTeam.Update(_team);
                 return RedirectToAction("Index");
             }

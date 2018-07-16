@@ -15,7 +15,7 @@ namespace mVoxApp.Web.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Informe o número do Grupo")]
+        [Required(ErrorMessage = "Informe o número do Grupo (entre 1 e 5)")]
         [Display(Name = "Classificação")]
         [Range(0, 5)]
         public int KeyGroup { get; set; }
