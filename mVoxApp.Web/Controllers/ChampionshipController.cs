@@ -34,23 +34,18 @@ namespace mVoxApp.Web.Controllers
 
         public ActionResult Tables()
         {
-            //Teams     --------------------------------
+            //Teams    
             _mngerTeam = new ManagerTeamStaticRepository();
             List<TeamModel> _listTeams = _mngerTeam.GetAll().OrderBy(x => x.Id).ToList();            
 
-            //Keygroup  --------------------------------
+            //Keygroup  
             _mngerKey = new ManagerKeyGroupStaticRepository();
-            List<KeyGroupModel> _listKeygroups = _mngerKey.GetAll().OrderBy(x=>x.Id).ToList();
-
-
+            List<KeyGroupModel> _listKeygroups = _mngerKey.GetAll().OrderBy(x=>x.Id).ToList();        
 
             /*      +----------------------------------+
                     |              VIEWDATA            |
                     +----------------------------------+
-            */            
-            ViewData["teams-all"]     = _listTeams;
-            ViewData["keygroups-all"] = _listKeygroups;
-            
+            */                        
             for (int i = 1; i <= _listKeygroups.Count; i++)
             {
                 //DETALHES DOS GRUPOS - TABELA PRINCIPAL TOPO
@@ -64,12 +59,11 @@ namespace mVoxApp.Web.Controllers
                 //NOMES DAS TABELAS
                 // NAME: "KeyGroupName1" //  OBJECT: Strings    //  TYPE: ViewData      ** pegar parametro NAME de cada OBJETO dentro da lista
                 ViewData[$"KeyGroupName{i}"] = _listKeygroups[i-1].Name;
-
             }
-                        
+
+            ViewData["teams-all"] = _listTeams;
             ViewData[$"keygroups-all"] = _listKeygroups;
-            ViewData[$"KeyGroups"] = _listKeygroups;
-                                    
+            ViewData[$"KeyGroups"] = _listKeygroups;                                    
 
             return View("Tables", _listTeams);
         }
