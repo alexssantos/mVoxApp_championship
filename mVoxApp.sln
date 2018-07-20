@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mVoxApp.Web", "mVoxApp.Web\mVoxApp.Web.csproj", "{27E913B7-BA2E-48C9-A7ED-D590F41DF650}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Query_files", "Query_files", "{457FB39B-938D-44FA-AD40-0098E38E41D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

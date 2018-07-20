@@ -12,40 +12,23 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.name)
+            @Html.DisplayFor(model => model.Name)
         </dd>
-
+               
         <dt>
-            @Html.DisplayNameFor(model => model.points)
+            @Html.DisplayNameFor(model => model.KeyGroup)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.points)
+            @Html.DisplayFor(model => model.KeyGroup)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.keyGroup)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.keyGroup)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.flag)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.flag)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Tables")
 </p>

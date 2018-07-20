@@ -19,7 +19,7 @@
 <hr /><br /><br /><br />
 <div>
     <h2 class="text-center">Tabela das Etapas</h2>
-    @Html.Partial("PartialView/_TablePView_keygroup", ViewData["keygroups"])
+    @Html.Partial("PartialView/_TableKeyGroupDetails", ViewData["keygroups-all"])
 </div>
 
 <hr />
@@ -46,7 +46,7 @@
                         </h2>
                     </hw>
 
-                    @Html.Partial("PartialView/_TablePView", ViewData[$"TeamsByKeyGroup{i}"])
+                    @Html.Partial("PartialView/_TableByKeyGroup", ViewData[$"TeamsByKeyGroup{i}"])
 
                 }
             }
