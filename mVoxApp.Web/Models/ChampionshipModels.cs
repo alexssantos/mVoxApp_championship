@@ -15,9 +15,9 @@ namespace mVoxApp.Web.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Informe o número do Grupo (entre 1 e 5)")]
+        [Required(ErrorMessage = "Informe o número do Grupo (entre 0 e 4)")]
         [Display(Name = "Classificação")]
-        [Range(0, 5)]
+        [Range(0, 4)]
         public int KeyGroup { get; set; }
 
         public bool Winner { get; set; }
@@ -35,9 +35,12 @@ namespace mVoxApp.Web.Models
 
         [Display(Name = "Classificados")]
         public int TotalTeams { get; set; }
-        //public int MaxMatchs { get; set; }
-        //public int TotalMatchs { get; set; }
-        //List<MatchModel> ListMatchs { get; set; }
+
+        /*
+        public int MaxMatchs { get; set; }
+        public int TotalMatchs { get; set; }
+        List<MatchModel> ListMatchs { get; set; }
+        */
     }
 
     public class MatchModel
@@ -49,14 +52,16 @@ namespace mVoxApp.Web.Models
         public int GoalsTeamB { get; set; }
     }
 
-    //public class ChampionshipModel
-    //{
-    //    public int Id { get; set; }
-    //    public List<KeyGroupModel> ListKeyGroups { get; set; }
+    /*
+    public class ChampionshipModel
+    {
+        public int Id { get; set; }
+        public List<KeyGroupModel> ListKeyGroups { get; set; }
 
-    //    public ChampionshipModel()
-    //    {
-    //        ListKeyGroups = new List<KeyGroupModel>();
-    //    }
-    //}
+        public ChampionshipModel()
+        {
+            ListKeyGroups = new List<KeyGroupModel>();
+        }
+    }
+    */
 }

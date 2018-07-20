@@ -13,7 +13,8 @@ namespace mVoxApp.Web.App_Data.Repository
         static List<TeamModel>      StaticListTeams;
         static List<KeyGroupModel>  StaticListGroups;
         //static List<MatchModel>     StaticListMatch;
-
+        
+        //Constructor
         public StaticListRepository()
         {
             if (StaticListTeams == null)
@@ -25,11 +26,7 @@ namespace mVoxApp.Web.App_Data.Repository
             {
                 StaticListGroups = new List<KeyGroupModel>();
                 PreLoadKeyGroups();
-            }
-            //if (StaticListMatch == null)
-            //{
-            //    StaticListMatch = new List<MatchModel>();
-            //}
+            }           
         }
 
         //PreLOAD
@@ -47,7 +44,8 @@ namespace mVoxApp.Web.App_Data.Repository
                 );
             }
         }
-        /// <KEYGroups>        
+        
+        /// <KEY-Groups: Names>        
         /// 0. Nenhum
         /// 1. Oitavas
         /// 2. Quartas
@@ -113,7 +111,6 @@ namespace mVoxApp.Web.App_Data.Repository
             var index = StaticListTeams.IndexOf(oldTeam);
             StaticListTeams[index] = newTeam;
         }
-
 
         //KeyGroups
         public List<KeyGroupModel> GetKeyGroups()

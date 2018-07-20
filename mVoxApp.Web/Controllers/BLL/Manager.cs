@@ -12,7 +12,7 @@ namespace mVoxApp.Web.Controllers.BLL
     {
         StaticListRepository _rep = new StaticListRepository();
 
-        //----------STATIC CRUD TEAM ----------//
+        //---------- CRUD TEAM ----------//
         public List<TeamModel> GetAll()
         {
             List<TeamModel> _retorno = _rep.GetAllTeam();
@@ -62,6 +62,7 @@ namespace mVoxApp.Web.Controllers.BLL
     {
         StaticListRepository _rep;
 
+        //---------- METHODS KEY-G ----------//
         public List<KeyGroupModel> GetAll()
         {
             _rep = new StaticListRepository();
