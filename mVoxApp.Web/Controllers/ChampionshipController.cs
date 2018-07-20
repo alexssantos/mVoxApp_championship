@@ -30,8 +30,6 @@ namespace mVoxApp.Web.Controllers
             return View();
         }
 
-
-
         public ActionResult Tables()
         {
             //Teams    
@@ -95,8 +93,18 @@ namespace mVoxApp.Web.Controllers
             {
                 return View("Error");
             }
+        }        
+
+        public ActionResult NotCreated()
+        {
+            return View("NotCreated");
         }
 
+        /* 
+                +---------------------------------------------------------------+
+                |                           CRUD                                |
+                +---------------------------------------------------------------+
+        */
         // GET: Championship/Details/5
         public ActionResult Details(int id)
         {
@@ -177,6 +185,30 @@ namespace mVoxApp.Web.Controllers
             }
         }
 
+        // GET: Championship/Search
+        public ActionResult Search()
+        {
+            return View("Search");
+        }
+
+        // POST: Championship/Search
+        [HttpPost]
+        public ActionResult Search(TeamModel busca)
+        {
+            try
+            {
+                _mngerTeam = new ManagerTeamStaticRepository();
+                List<TeamModel> ListaBuscada = _mngerTeam.GetByName(busca.Name);
+                ViewData["SearchPView"] = ListaBuscada;
+
+                return View("Search");
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
+
         // GET: Championship/Delete/5
         public ActionResult Delete(int id)
         {
@@ -201,34 +233,8 @@ namespace mVoxApp.Web.Controllers
             }
         }
 
-        // GET: Championship/Search
-        public ActionResult Search()
-        {           
-            return View("Search");
-        }
-
-        // POST: Championship/Search
-        [HttpPost]
-        public ActionResult Search(TeamModel busca)
-        {
-            try
-            {
-                _mngerTeam = new ManagerTeamStaticRepository();
-                List<TeamModel> ListaBuscada = _mngerTeam.GetByName(busca.Name);
-                ViewData["SearchPView"] = ListaBuscada;
-
-                return View("Search");
-            }
-            catch
-            {
-                return View("Error");
-            }
-        }
-
-        public ActionResult NotCreated()
-        {
-            return View("NotCreated");
-        }
+        
+        
 
     }
 }
