@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<mVoxApp.Web.Models.TeamModel>
 
-@{
+@*  Alert - Esta Tabela de Classificação já esta Cheia
+    
+    @{
     ViewBag.Title = "Tables";
     Layout = "~/Views/Shared/_Layout.cshtml";
     if ( @ViewBag.alert2 != null )
@@ -12,11 +14,8 @@
     }
 }
 
-<br /><br />
+<h2 class="text-center danger">@ViewBag.KeyGroupFull</h2>*@
 
-<h2 class="text-center danger">@ViewBag.KeyGroupFull</h2>
-
-<hr /><br /><br /><br />
 <div>
     <h2 class="text-center">Tabela das Etapas</h2>
     @Html.Partial("PartialView/_TableKeyGroupDetails", ViewData["keygroups-all"])
@@ -31,8 +30,10 @@
             count++;
         }
 
-        <h5 class="text-center">Grupos de Classificação: @(count - 1)</h5>
 
+        <h5 class="text-center">Grupos de Classificação Registrados: @(count - 1)</h5>
+
+        //Tabela
         if (ViewData["teams-all"] != null)
         {
             if (ViewData.Values != null && ViewData.Values.Count() > 0)
@@ -41,11 +42,13 @@
                 {
                     <hr /><br />
                     <hw>
-                        <h2 class="text-center">
-                            Classificação @(i-1): @ViewData[$"keygroupname{i}"]
-                        </h2>
+                        <!--Titulo da Tabela-->
+                        <h1 class="text-center">
+                            Classificação @(i - 1) | @ViewData[$"keygroupname{i}"]
+                        </h1>
                     </hw>
 
+                    <!--Conteudo da Tabela-->
                     @Html.Partial("PartialView/_TableByKeyGroup", ViewData[$"TeamsByKeyGroup{i}"])
 
                 }

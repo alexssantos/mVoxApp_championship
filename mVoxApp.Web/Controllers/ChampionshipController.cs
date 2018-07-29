@@ -11,8 +11,8 @@ namespace mVoxApp.Web.Controllers
 {
     public class ChampionshipController : Controller
     {
-        ManagerTeamStaticRepository _mngerTeam;
-        ManagerKeyGroupStaticRepository _mngerKey;
+        ManagerTeamStaticRepository _mngerTeam = new ManagerTeamStaticRepository();
+        ManagerKeyGroupStaticRepository _mngerKey = new ManagerKeyGroupStaticRepository();
 
 
         public ActionResult Index()
@@ -33,11 +33,9 @@ namespace mVoxApp.Web.Controllers
         public ActionResult Tables()
         {
             //Teams    
-            _mngerTeam = new ManagerTeamStaticRepository();
             List<TeamModel> _listTeams = _mngerTeam.GetAll().OrderBy(x => x.Id).ToList();            
 
             //Keygroup  
-            _mngerKey = new ManagerKeyGroupStaticRepository();
             List<KeyGroupModel> _listKeygroups = _mngerKey.GetAll().OrderBy(x=>x.Id).ToList();        
 
             /*      +----------------------------------+
@@ -47,15 +45,13 @@ namespace mVoxApp.Web.Controllers
             for (int i = 1; i <= _listKeygroups.Count; i++)
             {
                 //DETALHES DOS GRUPOS - TABELA PRINCIPAL TOPO
-                // NAME: "TeamByKeyGroup1" //  OBJECT: List<Team>    //  TYPE: ViewData 
                 ViewData[$"TeamsByKeyGroup{i}"] = _listTeams.FindAll(x => x.KeyGroup == (i-1)).ToList();
 
                 //Count TotalTeams -> KeyGroup                
                 int qtdd = _mngerTeam.CountByKeyGroup(i - 1);
                 _listKeygroups[i - 1].TotalTeams = qtdd;
 
-                //NOMES DAS TABELAS
-                // NAME: "KeyGroupName1" //  OBJECT: Strings    //  TYPE: ViewData      ** pegar parametro NAME de cada OBJETO dentro da lista
+                //NOMES DAS TABELAS DE CLASSIFICAÇÃO
                 ViewData[$"KeyGroupName{i}"] = _listKeygroups[i-1].Name;
             }
 
@@ -70,9 +66,6 @@ namespace mVoxApp.Web.Controllers
         {
             try
             {
-                _mngerTeam = new ManagerTeamStaticRepository();
-                _mngerKey = new ManagerKeyGroupStaticRepository();
-
                 TeamModel _team = _mngerTeam.GetByID(id);
                 int nextKeyGroup = _team.KeyGroup + 1;
 
@@ -108,7 +101,6 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Details/5
         public ActionResult Details(int id)
         {
-            _mngerTeam = new ManagerTeamStaticRepository();
             TeamModel team = _mngerTeam.GetByID(id);
             return View(team);
         }
@@ -118,7 +110,6 @@ namespace mVoxApp.Web.Controllers
         {
             try
             {
-                _mngerTeam = new ManagerTeamStaticRepository();
                 TeamModel _team = _mngerTeam.GetByID(id);
                 _team.KeyGroup = 0;
 
@@ -134,7 +125,6 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Create
         public ActionResult Create()
         {
-            _mngerTeam = new ManagerTeamStaticRepository();            
             List<TeamModel> listReturn = _mngerTeam.GetAll().OrderBy(x => x.Id).ToList();
             ViewData["TeamList"] = listReturn;
             
@@ -147,7 +137,6 @@ namespace mVoxApp.Web.Controllers
         {
             try
             {
-                _mngerTeam = new ManagerTeamStaticRepository();
                 _mngerTeam.Create(_team);
                 
                 //ViewBag.Msg = "Criado Com Sucesso";
@@ -164,7 +153,6 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Edit/5
         public ActionResult Edit(int id)
         {
-            _mngerTeam = new ManagerTeamStaticRepository();
             TeamModel retorno = _mngerTeam.GetByID(id);
             return View("Edit", retorno);
         }
@@ -175,7 +163,6 @@ namespace mVoxApp.Web.Controllers
         {
             try
             {
-                _mngerTeam = new ManagerTeamStaticRepository();               
                 _mngerTeam.Update(_team);
                 return RedirectToAction("Index");
             }
@@ -197,7 +184,6 @@ namespace mVoxApp.Web.Controllers
         {
             try
             {
-                _mngerTeam = new ManagerTeamStaticRepository();
                 List<TeamModel> ListaBuscada = _mngerTeam.GetByName(busca.Name);
                 ViewData["SearchPView"] = ListaBuscada;
 
@@ -212,7 +198,6 @@ namespace mVoxApp.Web.Controllers
         // GET: Championship/Delete/5
         public ActionResult Delete(int id)
         {
-            _mngerTeam = new ManagerTeamStaticRepository();
             TeamModel retorno = _mngerTeam.GetByID(id);
             return View("Delete", retorno);            
         }
@@ -223,7 +208,6 @@ namespace mVoxApp.Web.Controllers
         {
             try
             {
-                _mngerTeam = new ManagerTeamStaticRepository();
                 _mngerTeam.Delete(id);
                 return RedirectToAction("Create");
             }
