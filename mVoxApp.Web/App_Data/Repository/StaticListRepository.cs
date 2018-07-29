@@ -55,26 +55,26 @@ namespace mVoxApp.Web.App_Data.Repository
         /// </KEYGroups>
         private void PreLoadKeyGroups()
         {
-            List<string> namesKeyGroups = new List<string>();
-            namesKeyGroups.Add("Não Qualificado (oo)"); 
-            namesKeyGroups.Add("Oitavas de Finais (16)"); 
-            namesKeyGroups.Add("Quartas de Finais (8)"); 
-            namesKeyGroups.Add("Semi Finais (4)"); 
-            namesKeyGroups.Add("Final (2)");
-
-            for (int i = 0; i < 5; i++)
+            List<string> namesKeyGroups = new List<string>( )
             {
+                "Não Qualificado (oo)",
+                "Oitavas de Finais (16)",
+                "Quartas de Finais (8)",
+                "Semi Finais (4)",
+                "Final (2)"
+            };
+
+            for (int i = 0; i < namesKeyGroups.Count; i++)
+            {
+                var maxTeams = (int)((1 / (Math.Pow(2, i))) * 32);      //Lista não aceita fazer calculo junto com a adição de parametros
                 StaticListGroups.Add(new KeyGroupModel { Id=i,
                                                          Name = namesKeyGroups[i],
-                                                         MaxTeams = ( 1/((int)Math.Pow(2, i)) ) * 32,
+                                                         MaxTeams = maxTeams,
                                                          TotalTeams = 0 });
-            }
+            }       
 
-            StaticListGroups[0].MaxTeams = 1000;
-            StaticListGroups[1].MaxTeams = 16;
-            StaticListGroups[2].MaxTeams = 8;
-            StaticListGroups[3].MaxTeams = 4;
-            StaticListGroups[4].MaxTeams = 2;
+            //Não Classificados sem limites em qtdd de times
+            StaticListGroups[0].MaxTeams = 1000;     
         }
 
         //CRUD Team
