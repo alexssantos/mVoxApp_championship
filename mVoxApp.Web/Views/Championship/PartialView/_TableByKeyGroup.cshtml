@@ -16,7 +16,9 @@
 
             @foreach (var item in Model)
             {
-                <tr>
+                var winner = item.Winner == true ? "success" : null;
+                
+                <tr class="@winner">
                     <td class="text-center">
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
@@ -30,7 +32,7 @@
                              @Html.ActionLink("Desclassificado", "DeleteFromKeyGroup", new { id = item.Id }, new { @Class = "btn btn-default btn-danger" })
                         }
                     </td>
-                </tr>
+                </tr>                
             }
 
         </table>
