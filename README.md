@@ -1,3 +1,3 @@
 # Championship - c#
 
-Desafio de estágio - inspiração https://www.uplabs.com/posts/player-statistics-interface
+Deployed on Microsoft Azure - https://alexssantos-championship.azurewebsites.net/
